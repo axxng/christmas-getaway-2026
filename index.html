@@ -90,6 +90,13 @@ td.draw{min-width:220px;max-width:300px}
 .trips{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
 .trip{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:12px;align-content:start;min-width:0}
 .trip h3{font-family:var(--display);font-size:20px;margin:0}
+.trip-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tp{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:600;font-size:14px}
+.bb{justify-self:start;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--pine);background:var(--pine-soft);padding:2px 8px;border-radius:4px}
+.trip:target{outline:2px solid var(--pine);outline-offset:2px}
+td.dest a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--muted)}
+td.dest a:hover,td.dest a:focus-visible{color:var(--pine);border-color:var(--pine)}
+.itl{display:block;font-size:12px;font-weight:500;margin-top:2px}
 .trip .fl{font-size:13px;color:var(--muted);margin:0}
 .trip .fl code{font-family:var(--mono);font-size:12px;color:var(--ink)}
 .trip ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
@@ -106,7 +113,7 @@ footer a{color:var(--pine)}
     <div class="eyebrow">Singapore return trips · out Wed 23 Dec, back Sat 26 Dec 2026</div>
     <h1>Christmas Getaway Fares</h1>
     <span class="stamp">Re-priced 13 Nov 2026 · changes shown against 8 Nov</span>
-    <p class="lede">Each row is a real round trip priced on Google Flights: the cheapest outbound and return of 12 hours or less each way, with flight numbers and local times. "Lowest" is the cheapest seller Google listed (often a travel agent); "Airline" is the price booking with the airline itself. One adult, economy, taxes in, checked bags extra on budget carriers. Fares will move.</p>
+    <p class="lede">Tap a destination for its rough itinerary. Each row is a real round trip priced on Google Flights: the cheapest outbound and return of 12 hours or less each way, with flight numbers and local times. "Lowest" is the cheapest seller Google listed (often a travel agent); "Airline" is the price booking with the airline itself. One adult, economy, taxes in, checked bags extra on budget carriers. Fares will move.</p>
   </header>
 
   <section aria-labelledby="picks-h">
@@ -116,55 +123,6 @@ footer a{color:var(--pine)}
       <div class="pick"><span class="tag">Real winter</span><b>Busan · from SGD 757</b><p>Jeju Air nonstop both ways, <code>7C 2642</code> 00:25 out, <code>7C 2641</code> 17:45 back. SGD 772 with Jeju Air.</p></div>
       <div class="pick"><span class="tag">Easy timings</span><b>Hong Kong · from SGD 717</b><p>Scoot <code>TR 982</code> 16:00 out, <code>TR 983</code> 22:00 back. Down SGD 117 since 8 Nov.</p></div>
       <div class="pick"><span class="tag">Snow</span><b>Sapporo · from SGD 1,181</b><p>Scoot <code>TR 892</code> via Taipei, 1h15 connection each way. Up SGD 65 since 8 Nov.</p></div>
-    </div>
-  </section>
-
-  <section aria-labelledby="trips-h">
-    <div class="sec-head"><h2 id="trips-h">Rough itineraries</h2><p>Timed around the flights above</p></div>
-    <div class="trips">
-      <article class="trip">
-        <h3>Taipei</h3>
-        <p class="fl">Lands Wed 05:35 on <code>TR 866</code>. Leaves Sat 01:50 on <code>TR 873</code>, so Friday night is your last night.</p>
-        <ol>
-          <li><span class="day">Wed 23</span><span>Airport MRT into the city (about 40 min) and drop your bags. Breakfast at Fu Hang Dou Jiang, then Dadaocheng and Dihua Street. Rest in the afternoon. Evening at Xinyi district lights and Taipei 101.</span></li>
-          <li><span class="day">Thu 24</span><span>Day trip to Jiufen and Shifen to release a sky lantern. Back by evening for Christmasland in New Taipei City at Banqiao Station Square and New Taipei City Plaza.</span></li>
-          <li><span class="day">Fri 25</span><span>Beitou hot springs in the morning. Elephant Mountain for sunset, then Raohe night market. Airport MRT by about 22:00.</span></li>
-        </ol>
-        <p class="ev">Christmasland runs 13 Nov to 27 Dec 2026 (Kanahei's Small Animals theme this year).</p>
-      </article>
-      <article class="trip">
-        <h3>Busan</h3>
-        <p class="fl">Lands Wed 08:05 on <code>7C 2642</code>. Leaves Sat 17:45 on <code>7C 2641</code>.</p>
-        <ol>
-          <li><span class="day">Wed 23</span><span>Head to Haeundae. Ride the Blueline Park sky capsule along the coast. Evening on Gwangalli beach for the Gwangan Bridge lights.</span></li>
-          <li><span class="day">Thu 24</span><span>Gamcheon Culture Village, then lunch at Jagalchi fish market and BIFF Square street food. Evening at the Christmas Tree Festival on Gwangbok-ro in Nampo-dong.</span></li>
-          <li><span class="day">Fri 25</span><span>Haedong Yonggungsa seaside temple in the morning. Spa Land at Shinsegae Centum City in the afternoon. Dinner in Seomyeon.</span></li>
-          <li><span class="day">Sat 26</span><span>Beomeosa temple or Huinnyeoul Culture Village. Leave for Gimhae airport by 15:00.</span></li>
-        </ol>
-        <p class="ev">The tree festival usually runs from late November into early January. 2026 dates weren't published yet when I checked on 14 Nov.</p>
-      </article>
-      <article class="trip">
-        <h3>Hong Kong</h3>
-        <p class="fl">Lands Wed 20:35 on <code>TR 982</code>. Leaves Sat 22:00 on <code>TR 983</code>.</p>
-        <ol>
-          <li><span class="day">Wed 23</span><span>Airport Express to Kowloon. Late walk along the Tsim Sha Tsui promenade lights.</span></li>
-          <li><span class="day">Thu 24</span><span>Peak Tram in the morning. WinterFest's Christmas Town at Statue Square (20-metre tree) and the Chater Road light displays. Lee Tung Avenue or Lan Kwai Fong at night, which will be packed.</span></li>
-          <li><span class="day">Fri 25</span><span>Lantau: Ngong Ping 360 cable car, the Big Buddha and Tai O fishing village. Back in Tsim Sha Tsui for the 20:00 Symphony of Lights.</span></li>
-          <li><span class="day">Sat 26</span><span>Disneyland's Christmas parade, or a ferry day trip to Macau. Airport Express by about 19:30.</span></li>
-        </ol>
-        <p class="ev">WinterFest runs 21 Nov to 31 Dec 2026. 25 and 26 Dec are public holidays in Hong Kong, so expect crowds.</p>
-      </article>
-      <article class="trip">
-        <h3>Sapporo</h3>
-        <p class="fl">Lands Wed 17:00 on <code>TR 892</code> via Taipei. Leaves Sat 18:15 on <code>TR 893</code>.</p>
-        <ol>
-          <li><span class="day">Wed 23</span><span>JR rapid train into Sapporo (about 40 min). Evening at Odori Park for the German Christmas Market and White Illumination.</span></li>
-          <li><span class="day">Thu 24</span><span>Day trip to Otaru by JR (about 40 min): the canal, Sakaimachi Street and the music box museum. Back for Christmas Eve at Odori, then ramen in Susukino.</span></li>
-          <li><span class="day">Fri 25</span><span>Half day at Jozankei onsen. Mt Moiwa ropeway for the night view. Last night of the Christmas market.</span></li>
-          <li><span class="day">Sat 26</span><span>Seafood breakfast at Nijo Market, then Hokkaido Shrine. JR to New Chitose by 15:30.</span></li>
-        </ol>
-        <p class="ev">The Christmas market runs 20 Nov to 25 Dec 2026, so you get its last three nights.</p>
-      </article>
     </div>
   </section>
 
@@ -188,6 +146,11 @@ footer a{color:var(--pine)}
   <section aria-labelledby="t3-h">
     <div class="sec-head"><h2 id="t3-h">Struck off</h2><p>Over SGD 1,500, or no sensible itinerary</p></div>
     <div class="scroll"><table id="t3"></table></div>
+  </section>
+
+  <section aria-labelledby="trips-h">
+    <div class="sec-head"><h2 id="trips-h">Rough itineraries</h2><p>All destinations, cheapest first, timed around the flights in the tables</p></div>
+    <div class="trips" id="trips"></div>
   </section>
 
   <section class="notes" aria-label="Notes">
@@ -332,6 +295,157 @@ const T3=[
  {d:"Kaohsiung",when:"Checked 13 Nov, not added",low:596,prev:null,why:"No nonstop. The SGD 596 fare has a 16-hour layover in Ho Chi Minh City; sensible one-stops start around SGD 870–990. Taipei is cheaper and nonstop.",
   route:"AirAsia via KUL out (overnight); Vietjet via SGN back"}
 ];
+/* Itineraries keyed by destination. day: [label, text]. Times follow the flights in the tables above. */
+const ITIN={
+"Kuala Lumpur":{fl:"Lands Wed 16:15 on TR 442. Leaves Sat 06:05 on AK 701, so plan Friday as the last full day.",days:[
+ ["Wed 23","KLIA Ekspres to KL Sentral (about 30 min). Evening in Bukit Bintang: Pavilion KL's Christmas display, then dinner on Jalan Alor."],
+ ["Thu 24","Batu Caves in the morning before the heat. Merdeka Square and Kwai Chai Hong in the afternoon. Evening at KLCC Park and Suria KLCC's decorations."],
+ ["Fri 25","Day trip up to Genting Highlands for cooler air, or Kuala Selangor fireflies after dark. Early night."],
+ ["Sat 26","Leave for the airport around 03:30."]],ev:"Christmas here is mostly mall displays. Pick it for a cheap, easy break."},
+"Bali":{fl:"Lands Wed 20:10 on SV 856. Leaves Sat 11:10 on TR 281.",days:[
+ ["Wed 23","Transfer to Seminyak or Canggu (30 to 60 min depending on traffic)."],
+ ["Thu 24","Ubud: Tegallalang rice terraces and the Monkey Forest. Christmas Eve dinner at a resort."],
+ ["Fri 25","Beach day. Uluwatu temple and the Kecak dance at sunset."],
+ ["Sat 26","Leave for the airport around 08:30."]],ev:"It's the wet season and holiday-week traffic is heavy, so allow extra time on the roads."},
+"Ho Chi Minh City":{fl:"Lands Wed 17:20 on VJ 816. Leaves Sat 06:50 on VJ 813.",days:[
+ ["Wed 23","Check in around District 1. Evening on Nguyen Hue walking street."],
+ ["Thu 24","War Remnants Museum and Ben Thanh market. Christmas Eve around Notre-Dame Cathedral and Dong Khoi, which get very crowded."],
+ ["Fri 25","Half-day trip to the Cu Chi tunnels. Dinner in District 3."],
+ ["Sat 26","Leave for the airport around 05:00."]],ev:""},
+"Da Nang":{fl:"Lands Wed 21:05 on VJ 882. Leaves Sat 12:00 on VJ 973.",days:[
+ ["Wed 23","Check in near My Khe beach."],
+ ["Thu 24","Hoi An (about 45 min): the old town by day, then lanterns and river boats at night for Christmas Eve."],
+ ["Fri 25","Ba Na Hills and the Golden Bridge (cool and often misty), or the Marble Mountains."],
+ ["Sat 26","Han market and the pink Da Nang Cathedral in the morning. The airport is close to town, so leave by 10:00."]],ev:"December is the tail of the rainy season. Keep a flexible day."},
+"Bangkok":{fl:"Lands Wed 08:15 on TR 608. Leaves Sat 22:20 on TR 621.",days:[
+ ["Wed 23","Grand Palace and Wat Pho. River ferry to ICONSIAM for the evening."],
+ ["Thu 24","Jim Thompson House and the Siam malls. CentralWorld's Christmas lights after dark."],
+ ["Fri 25","Day trip to Ayutthaya, or an early start for a floating market. Rooftop bar in the evening."],
+ ["Sat 26","Chatuchak Weekend Market, then a massage. Leave for the airport by 19:30."]],ev:""},
+"Chengdu":{fl:"Lands Wed 23:45 on EU 2220 via Shenzhen. Leaves Sat 08:10 on EU 2217, so you get two full days.",days:[
+ ["Thu 24","Giant Panda Breeding Research Base early, when the pandas are most active. Kuanzhai Alley, then hotpot. Chunxi Road and Taikoo Li in the evening."],
+ ["Fri 25","High-speed train to Leshan for the Giant Buddha (about an hour). Sichuan opera face-changing show at night."],
+ ["Sat 26","Leave for the airport by 06:15."]],ev:""},
+"Taipei":{fl:"Lands Wed 05:35 on TR 866. Leaves Sat 01:50 on TR 873, so Friday night is your last night.",days:[
+ ["Wed 23","Airport MRT into the city (about 40 min) and drop your bags. Breakfast at Fu Hang Dou Jiang, then Dadaocheng and Dihua Street. Rest in the afternoon. Evening at Xinyi district lights and Taipei 101."],
+ ["Thu 24","Day trip to Jiufen and Shifen to release a sky lantern. Back by evening for Christmasland in New Taipei City at Banqiao Station Square and New Taipei City Plaza."],
+ ["Fri 25","Beitou hot springs in the morning. Elephant Mountain for sunset, then Raohe night market. Airport MRT by about 22:00."]],ev:"Christmasland runs 13 Nov to 27 Dec 2026 (Kanahei's Small Animals theme this year)."},
+"Jeju":{fl:"Lands Wed 07:20 on TR 838. Leaves Sat 08:55 on TR 839.",days:[
+ ["Wed 23","Pick up a rental car (you need an International Driving Permit). East side: Seongsan Ilchulbong and the ferry to Udo."],
+ ["Thu 24","Short Eorimok trail on Hallasan, which may have snow, or Camellia Hill, which flowers in winter. Christmas Eve in Jeju City."],
+ ["Fri 25","South coast: Cheonjiyeon waterfall, the Jusangjeolli cliffs and Seogwipo Olle market."],
+ ["Sat 26","Return the car and get to the airport by 07:00."]],ev:"Christmas Day is a public holiday in Korea."},
+"Hanoi":{fl:"Lands Wed 18:50 on VN 252 via Ho Chi Minh City. Leaves Sat 08:05 on VN 661.",days:[
+ ["Wed 23","Dinner in the Old Quarter: bun cha and egg coffee."],
+ ["Thu 24","Hoan Kiem Lake and the Temple of Literature. Christmas Eve at St Joseph's Cathedral, where the crowds spill into the streets."],
+ ["Fri 25","Ha Long Bay day cruise (about 2.5 hours each way by road)."],
+ ["Sat 26","Leave for the airport around 06:00."]],ev:""},
+"Guangzhou":{fl:"Lands Wed 05:20 on AQ 1276. Leaves Sat 19:55 on AQ 1275.",days:[
+ ["Wed 23","Dim sum breakfast, then rest. Shamian Island in the afternoon and Canton Tower at night."],
+ ["Thu 24","Chen Clan Ancestral Hall and Beijing Road. Christmas Eve at the Tianhe malls, then a Pearl River night cruise."],
+ ["Fri 25","Metro to Foshan for the Ancestral Temple and Lingnan Tiandi."],
+ ["Sat 26","Yuexiu Park in the morning. Leave for the airport by 17:30."]],ev:""},
+"Beijing":{fl:"Lands Wed 13:15 on ZH 9103 via Shenzhen. Leaves Sat 07:30 on ZH 9116.",days:[
+ ["Wed 23","Qianmen and Wangfujing in the evening."],
+ ["Thu 24","Forbidden City (book ahead) and Jingshan Park for the view. Christmas Eve at Sanlitun Taikoo Li."],
+ ["Fri 25","Great Wall at Mutianyu. Peking duck dinner."],
+ ["Sat 26","Leave for the airport by 05:30."]],ev:"Expect −8°C to 3°C. Pack proper winter gear."},
+"Macau":{fl:"Lands Wed 13:40 on MF 8681 via Xiamen. Leaves Sat 14:40 on MF 8682.",days:[
+ ["Wed 23","Senado Square and the Ruins of St Paul's, with the square's Christmas lighting after dark."],
+ ["Thu 24","Taipa Village, then the Cotai resorts' Christmas displays for Christmas Eve."],
+ ["Fri 25","Ferry to Hong Kong for the day, or Coloane village and Macau Tower."],
+ ["Sat 26","Egg tarts at Lord Stow's in Coloane. Leave for the airport by 12:40."]],ev:""},
+"Hong Kong":{fl:"Lands Wed 20:35 on TR 982. Leaves Sat 22:00 on TR 983.",days:[
+ ["Wed 23","Airport Express to Kowloon. Late walk along the Tsim Sha Tsui promenade lights."],
+ ["Thu 24","Peak Tram in the morning. WinterFest's Christmas Town at Statue Square (20-metre tree) and the Chater Road light displays. Lee Tung Avenue or Lan Kwai Fong at night, which will be packed."],
+ ["Fri 25","Lantau: Ngong Ping 360 cable car, the Big Buddha and Tai O fishing village. Back in Tsim Sha Tsui for the 20:00 Symphony of Lights."],
+ ["Sat 26","Disneyland's Christmas parade, or a ferry day trip to Macau. Airport Express by about 19:30."]],ev:"WinterFest runs 21 Nov to 31 Dec 2026. 25 and 26 Dec are public holidays in Hong Kong, so expect crowds."},
+"Shanghai":{fl:"Lands Wed 23:15 on CZ 3589 via Shenzhen. Leaves Sat 10:10 on CZ 3576, so you get two full days.",days:[
+ ["Thu 24","The Bund, Nanjing Road and Yu Garden. Christmas Eve on the Bund or in Xintiandi."],
+ ["Fri 25","Former French Concession (Wukang Road) and Tianzifang. Shanghai Tower observation deck at night."],
+ ["Sat 26","Hongqiao airport is close to town. Leave by 08:30."]],ev:""},
+"Busan":{fl:"Lands Wed 08:05 on 7C 2642. Leaves Sat 17:45 on 7C 2641.",days:[
+ ["Wed 23","Head to Haeundae. Ride the Blueline Park sky capsule along the coast. Evening on Gwangalli beach for the Gwangan Bridge lights."],
+ ["Thu 24","Gamcheon Culture Village, then lunch at Jagalchi fish market and BIFF Square street food. Evening at the Christmas Tree Festival on Gwangbok-ro in Nampo-dong."],
+ ["Fri 25","Haedong Yonggungsa seaside temple in the morning. Spa Land at Shinsegae Centum City in the afternoon. Dinner in Seomyeon."],
+ ["Sat 26","Beomeosa temple or Huinnyeoul Culture Village. Leave for Gimhae airport by 15:00."]],ev:"The tree festival usually runs from late November into early January. 2026 dates weren't published yet when I checked on 14 Nov."},
+"Manila":{fl:"Lands Wed 21:15 on Z2 502 via Kota Kinabalu. Leaves Sat 20:20 on 5J 803.",days:[
+ ["Thu 24","Intramuros and Manila Cathedral. The last Simbang Gabi mass is on Christmas Eve, followed by Noche Buena, the big family midnight meal."],
+ ["Fri 25","Makati: Ayala Triangle Gardens' Christmas light show, then Bonifacio Global City."],
+ ["Sat 26","Binondo food walk, or a day trip to Tagaytay for the Taal volcano view. Leave for the airport by 17:30, as traffic is bad."]],ev:"Simbang Gabi is the nine-night run of masses from 16 to 24 Dec."},
+"Dubai":{fl:"Lands Wed 04:10 on EK 353. Leaves Sat 03:15 on EK 354, so Friday night is your last night.",days:[
+ ["Wed 23","Rest after the overnight flight. Dubai Mall, Burj Khalifa At the Top (book ahead) and the fountain show in the evening."],
+ ["Thu 24","Old Dubai: Al Fahidi, an abra ride across the Creek, and the gold and spice souks. Christmas Eve at a hotel festive market or brunch."],
+ ["Fri 25","Desert safari in the afternoon. Leave for the airport around 00:30."]],ev:"Christmas isn't a public holiday here. Celebrations are in hotels and malls."},
+"Seoul":{fl:"Lands Wed 08:40 on 7C 2624. Leaves Sat 11:25 on TR 843.",days:[
+ ["Wed 23","Myeongdong, the department store façade light shows nearby, and Cheonggyecheon stream after dark."],
+ ["Thu 24","Gyeongbokgung (free entry in hanbok) and Bukchon. Christmas Eve at Lotte World Tower in Jamsil, which usually has a Christmas market."],
+ ["Fri 25","Namsan Seoul Tower, Ikseon-dong, then Hongdae in the evening."],
+ ["Sat 26","AREX to Incheon (about an hour). Leave by 08:30."]],ev:"Christmas Day is a public holiday in Korea."},
+"Okinawa":{fl:"Lands Wed 08:00 on TR 834. Leaves Sat 09:15 on TR 835.",days:[
+ ["Wed 23","Pick up a rental car (you need an International Driving Permit). Naha: Kokusai Street and Makishi market."],
+ ["Thu 24","Drive north to Churaumi Aquarium and Kouri Island. Christmas Eve at Mihama American Village in Chatan."],
+ ["Fri 25","Okinawa World and its cave in the daytime. Southeast Botanical Gardens' winter illumination at night."],
+ ["Sat 26","Return the car and get to the airport by 07:30."]],ev:""},
+"Osaka":{fl:"Lands Wed 09:35 on MM 774. Leaves Sat 18:40 on MM 773.",days:[
+ ["Wed 23","Kuromon market, Dotonbori and Shinsekai. Midosuji illumination in the evening."],
+ ["Thu 24","Universal Studios Japan (book ahead; Christmas Eve is very busy), or a Kyoto day trip for Fushimi Inari and Kiyomizu-dera."],
+ ["Fri 25","Osaka Castle, then Umeda Sky Building, which usually hosts a German Christmas market."],
+ ["Sat 26","Half day in Nara for the deer and Todai-ji. Leave for Kansai airport by 16:00."]],ev:""},
+"Fukuoka":{fl:"Lands Wed 13:45 on TW 227 via Jeju. Leaves Sat 10:30 on TW 228.",days:[
+ ["Wed 23","Canal City, then dinner at the Nakasu yatai street stalls."],
+ ["Thu 24","Half day at Dazaifu Tenmangu. Christmas Eve at the Hakata Station Christmas market."],
+ ["Fri 25","Day trip to Yufuin or Beppu for onsen (about 2 hours each way)."],
+ ["Sat 26","The airport is 5 min from Hakata by subway. Leave by 08:30."]],ev:"The flight home has an 8-hour layover in Jeju and lands at 01:15 on Sunday."},
+"Harbin":{fl:"Lands Thu 00:10 on MF 8097 via Nanjing. Leaves Sat 09:00 on MF 8094, so you get two days.",days:[
+ ["Thu 24","Late start. Central Street and St Sophia Cathedral. Walk out on the frozen Songhua River. Christmas Eve on Central Street."],
+ ["Fri 25","Siberian Tiger Park in the daytime. Ice and Snow World at night."],
+ ["Sat 26","Leave for the airport by 07:00."]],ev:"Ice and Snow World usually opens in mid to late December. Expect −24°C to −13°C, so pack serious cold-weather gear."},
+"Perth":{fl:"Lands Wed 08:25 on TR 52. Leaves Sat 10:35 on TR 53.",days:[
+ ["Wed 23","Kings Park and Elizabeth Quay. The city Christmas lights trail in the evening."],
+ ["Thu 24","Ferry to Rottnest Island for the quokkas. Christmas Eve in Fremantle."],
+ ["Fri 25","Beach day at Cottesloe. Most shops and many restaurants close on Christmas Day, so book lunch ahead."],
+ ["Sat 26","Leave for the airport by 08:30."]],ev:""},
+"Sydney":{fl:"Lands Wed 12:10 on TR 40. Leaves Sat 13:25 on TR 41.",days:[
+ ["Wed 23","Circular Quay, the Opera House and the harbour foreshore. City Christmas trees in the evening."],
+ ["Thu 24","Bondi to Coogee coastal walk. Christmas Eve at Darling Harbour."],
+ ["Fri 25","Christmas at Bondi Beach, then the ferry to Manly. Most shops close on Christmas Day."],
+ ["Sat 26","Boxing Day sales first thing. Leave for the airport by 11:00."]],ev:""},
+"Tokyo":{fl:"Lands Wed 10:55 on TR 866 via Taipei. Leaves Sat 08:50 on TR 895.",days:[
+ ["Wed 23","Shibuya and Harajuku. Omotesando and Roppongi Hills' Keyakizaka illuminations in the evening."],
+ ["Thu 24","Asakusa's Senso-ji and Ueno. Christmas Eve at the Marunouchi illuminations."],
+ ["Fri 25","Day trip to Kamakura or Hakone. Tokyo Tower at night."],
+ ["Sat 26","Stay near Ueno or Narita on Friday night. The Skyliner from Ueno takes about 40 min. Be at Narita by 06:50."]],ev:""},
+"Melbourne":{fl:"Lands Wed 21:20 on TR 38. Leaves Sat 13:25 on TR 59.",days:[
+ ["Thu 24","CBD laneways and Federation Square. The Myer Christmas windows on Bourke Street. Carols by Candlelight at the Sidney Myer Music Bowl, usually held on Christmas Eve."],
+ ["Fri 25","Royal Botanic Gardens and St Kilda beach. Most shops close on Christmas Day."],
+ ["Sat 26","Boxing Day sales first thing. Leave for the airport by 11:00."]],ev:"The Boxing Day Test at the MCG starts on 26 Dec, but the flight leaves too early to catch any of it."},
+"Sapporo":{fl:"Lands Wed 17:00 on TR 892 via Taipei. Leaves Sat 18:15 on TR 893.",days:[
+ ["Wed 23","JR rapid train into Sapporo (about 40 min). Evening at Odori Park for the German Christmas Market and White Illumination."],
+ ["Thu 24","Day trip to Otaru by JR (about 40 min): the canal, Sakaimachi Street and the music box museum. Back for Christmas Eve at Odori, then ramen in Susukino."],
+ ["Fri 25","Half day at Jozankei onsen. Mt Moiwa ropeway for the night view. Last night of the Christmas market."],
+ ["Sat 26","Seafood breakfast at Nijo Market, then Hokkaido Shrine. JR to New Chitose by 15:30."]],ev:"The Christmas market runs 20 Nov to 25 Dec 2026, so you get its last three nights."},
+"Goa":{fl:"Lands Wed 22:35 on IX 1021 via Delhi. Leaves Sat 17:20 on IX 1109.",days:[
+ ["Thu 24","North Goa beaches (Anjuna, Vagator). Midnight mass at a church in Panjim, then the beach parties."],
+ ["Fri 25","Old Goa: Basilica of Bom Jesus and Se Cathedral. Evening in Fontainhas, Panjim's Latin quarter."],
+ ["Sat 26","The airport (Mopa) is in north Goa, so stay north. Morning on the beach, then leave by 15:00."]],ev:"Singapore passport holders need an Indian e-Visa. Apply ahead."},
+"Cebu":{fl:"Lands Wed 05:20 on 5J 548. Leaves Sat 20:40 on 5J 547.",days:[
+ ["Wed 23","Rest, then Magellan's Cross, the Basilica del Santo Niño and Fort San Pedro."],
+ ["Thu 24","Day trip to Moalboal for the sardine run and snorkelling. Christmas Eve mass at the Basilica."],
+ ["Fri 25","Island hopping off Mactan."],
+ ["Sat 26","Temple of Leah and the Tops lookout. Leave for the airport by 18:30."]],ev:""}
+};
+const BEST=new Set(["Taipei","Busan","Hong Kong","Sapporo"]);
+const slug=s=>"trip-"+s.toLowerCase().replace(/[^a-z0-9]+/g,"-");
+function renderTrips(){
+  const rows=[...T1,...T2].slice().sort((a,b)=>a.low-b.low);
+  document.getElementById("trips").innerHTML=rows.filter(r=>ITIN[r.d]).map(r=>{const it=ITIN[r.d];return `<article class="trip" id="${slug(r.d)}">
+    <div class="trip-h"><h3>${esc(r.d)}</h3><span class="tp">SGD ${fmt(r.low)}</span></div>${BEST.has(r.d)?'<span class="bb">Best bet</span>':""}
+    <p class="fl">${esc(it.fl)}</p>
+    <ol>${it.days.map(d=>`<li><span class="day">${esc(d[0])}</span><span>${esc(d[1])}</span></li>`).join("")}</ol>
+    ${it.ev?`<p class="ev">${esc(it.ev)}</p>`:""}</article>`;}).join("");
+}
+
 const label={cold:"Cold winter",mild:"Cool / mild",hot:"Warm"};
 const cols=[["Destination","d"],["Price","low"],["Out · Wed 23 Dec","out"],["Back · Sat 26 Dec","ret"],["Christmas draw","draw"],["Weather","w"]];
 let filter="all";
@@ -354,7 +468,7 @@ function render(id,rows,state){
   const sortable=new Set([0,1,5]);
   const head="<thead><tr>"+cols.map((c,i)=>sortable.has(i)?`<th scope="col"><button type="button" data-i="${i}" aria-sort="${state.key===i?(state.dir>0?"ascending":"descending"):"none"}">${c[0]}</button></th>`:`<th scope="col">${c[0]}</th>`).join("")+"</tr></thead>";
   const body="<tbody>"+data.map(r=>`<tr>
-    <td class="dest">${esc(r.d)}${r.prev==null?'<span class="new">New</span>':""}${r.moved?`<span class="moved">${esc(r.moved)}</span>`:""}</td>
+    <td class="dest"><a href="#${slug(r.d)}">${esc(r.d)}</a>${r.prev==null?'<span class="new">New</span>':""}${r.moved?`<span class="moved">${esc(r.moved)}</span>`:""}</td>
     <td class="price"><span class="big">SGD ${fmt(r.low)}</span>${delta(r)}<span class="sub">Lowest via ${esc(r.lowBy)}</span><span class="sub">Airline: ${esc(r.air)}</span></td>
     <td class="legs">${legs(r.out)}</td>
     <td class="legs">${legs(r.ret)}</td>
@@ -374,7 +488,7 @@ function renderStruck(){
 const s1={key:1,dir:1},s2={key:1,dir:1};
 function all(){document.getElementById("c1").textContent=render("t1",T1,s1);document.getElementById("c2").textContent=render("t2",T2,s2);}
 document.querySelectorAll(".filters button").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.f;document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));all();}));
-all(); renderStruck();
+all(); renderStruck(); renderTrips();
 </script>
 
 </body>

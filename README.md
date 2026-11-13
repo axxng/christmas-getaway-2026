@@ -6,6 +6,6 @@ Live page: https://axxng.github.io/christmas-getaway-2026/
 
 - Two tables: under SGD 1,000, and SGD 1,000 to 1,500, with flight numbers and local times for every leg
 - A struck-off table for destinations that went over budget or had no sensible routing
-- Rough itineraries for Taipei, Busan, Hong Kong and Sapporo
+- A rough itinerary for every destination in both tables, timed around the flights
 
 Fares were last checked on 13 Nov 2026 and will have moved since.
