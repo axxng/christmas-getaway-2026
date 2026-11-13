@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Round-trip fares from Singapore for 23-26 Dec 2026, with flight details and rough itineraries.">
+<title>Christmas Getaway Fares</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+body{margin:0}
+/* Layout: one reading column; best bets, two sortable itinerary tables with flight-by-flight legs, a struck-off table, then notes. */
+:root{
+  --bg:#f6f7f5; --surface:#ffffff; --ink:#18211e; --muted:#5b6862; --line:#dde3df;
+  --pine:#1f5c4a; --pine-soft:#e3efe9; --berry:#9b2c3c; --berry-soft:#f6e4e7; --snow:#e8eef6; --snow-ink:#2c4a6e;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121815; --surface:#18201c; --ink:#e7ece9; --muted:#9aa8a1; --line:#2a3530;
+  --pine:#6cc3a3; --pine-soft:#1c3129; --berry:#f08a99; --berry-soft:#3a1f25; --snow:#1e2836; --snow-ink:#a9c4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121815; --surface:#18201c; --ink:#e7ece9; --muted:#9aa8a1; --line:#2a3530;
+  --pine:#6cc3a3; --pine-soft:#1c3129; --berry:#f08a99; --berry-soft:#3a1f25; --snow:#1e2836; --snow-ink:#a9c4e6; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1280px;margin:0 auto;padding-block:32px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:36px}
+header{display:grid;gap:10px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--pine);font-weight:600}
+h1{font-family:var(--display);font-size:clamp(28px,4.5vw,42px);line-height:1.1;margin:0;text-wrap:balance}
+h2{font-family:var(--display);font-size:24px;margin:0;text-wrap:balance}
+.lede{color:var(--muted);max-width:72ch;margin:0}
+.stamp{display:inline-block;font-size:13px;font-weight:600;color:var(--pine);background:var(--pine-soft);padding:3px 10px;border-radius:999px;justify-self:start}
+.picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.pick{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:6px;align-content:start}
+.pick b{font-family:var(--display);font-size:18px}
+.pick .tag{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.pick p{margin:0;color:var(--muted);font-size:14px}
+.pick code{font-family:var(--mono);font-size:13px;color:var(--ink)}
+section{display:grid;gap:12px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px}
+.sec-head p{margin:0;color:var(--muted);font-size:14px}
+.scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:1180px;font-size:14px}
+#t3{min-width:900px}
+th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap;background:var(--surface)}
+th button{all:unset;cursor:pointer;display:inline-flex;gap:4px;align-items:center}
+th button:focus-visible{outline:2px solid var(--pine);outline-offset:2px;border-radius:3px}
+th button::after{content:"↕";opacity:.45;font-size:11px}
+th button[aria-sort="ascending"]::after{content:"↑";opacity:1}
+th button[aria-sort="descending"]::after{content:"↓";opacity:1}
+td.dest{font-weight:600;white-space:nowrap}
+.new{display:inline-block;margin-left:6px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--pine);background:var(--pine-soft);padding:1px 6px;border-radius:4px;vertical-align:1px}
+.moved{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:2px}
+td.price{white-space:nowrap;min-width:160px}
+.big{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:600;font-size:15px}
+.delta{display:block;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+.down{color:var(--pine)}
+.up{color:var(--berry)}
+.flat{color:var(--muted)}
+.legs{min-width:250px}
+.leg{display:grid;gap:1px}
+.leg + .leg, .lay + .leg{margin-top:6px}
+.fn{font-family:var(--mono);font-weight:600;font-size:13px}
+.al{color:var(--muted);font-size:13px}
+.tm{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px}
+.lay{display:block;margin-top:6px;font-size:12px;color:var(--muted);border-left:2px solid var(--line);padding-left:8px}
+.lay.long{color:var(--berry);border-color:var(--berry)}
+td.draw{min-width:220px;max-width:300px}
+.sub{display:block;color:var(--muted);font-size:13px}
+.chip{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.cold{background:var(--snow);color:var(--snow-ink)}
+.mild{background:var(--pine-soft);color:var(--pine)}
+.hot{background:var(--berry-soft);color:var(--berry)}
+.warn{display:block;margin-top:6px;font-size:12px;color:var(--berry);font-weight:600}
+#t3 td.dest s{text-decoration-thickness:2px;text-decoration-color:var(--berry);color:var(--muted)}
+#t3 .big{color:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--pine);border-color:var(--pine);color:var(--bg)}
+.filters button:focus-visible{outline:2px solid var(--pine);outline-offset:2px}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.notes div{min-width:0}
+.notes h3{font-family:var(--display);font-size:17px;margin:0 0 8px}
+.notes ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.notes li span{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.trips{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
+.trip{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:12px;align-content:start;min-width:0}
+.trip h3{font-family:var(--display);font-size:20px;margin:0}
+.trip .fl{font-size:13px;color:var(--muted);margin:0}
+.trip .fl code{font-family:var(--mono);font-size:12px;color:var(--ink)}
+.trip ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.trip li{display:grid;grid-template-columns:62px 1fr;gap:10px;font-size:14px}
+.trip .day{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--pine);padding-top:2px}
+.trip .ev{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin:0}
+footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+footer a{color:var(--pine)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Singapore return trips · out Wed 23 Dec, back Sat 26 Dec 2026</div>
+    <h1>Christmas Getaway Fares</h1>
+    <span class="stamp">Re-priced 13 Nov 2026 · changes shown against 8 Nov</span>
+    <p class="lede">Each row is a real round trip priced on Google Flights: the cheapest outbound and return of 12 hours or less each way, with flight numbers and local times. "Lowest" is the cheapest seller Google listed (often a travel agent); "Airline" is the price booking with the airline itself. One adult, economy, taxes in, checked bags extra on budget carriers. Fares will move.</p>
+  </header>
+
+  <section aria-labelledby="picks-h">
+    <h2 id="picks-h">Best bets</h2>
+    <div class="picks">
+      <div class="pick"><span class="tag">Best value</span><b>Taipei · from SGD 584</b><p>Scoot <code>TR 866</code> 00:55 out, <code>TR 873</code> 01:50 back. Down SGD 81 since 8 Nov. Scoot direct SGD 596 on two tickets.</p></div>
+      <div class="pick"><span class="tag">Real winter</span><b>Busan · from SGD 757</b><p>Jeju Air nonstop both ways, <code>7C 2642</code> 00:25 out, <code>7C 2641</code> 17:45 back. SGD 772 with Jeju Air.</p></div>
+      <div class="pick"><span class="tag">Easy timings</span><b>Hong Kong · from SGD 717</b><p>Scoot <code>TR 982</code> 16:00 out, <code>TR 983</code> 22:00 back. Down SGD 117 since 8 Nov.</p></div>
+      <div class="pick"><span class="tag">Snow</span><b>Sapporo · from SGD 1,181</b><p>Scoot <code>TR 892</code> via Taipei, 1h15 connection each way. Up SGD 65 since 8 Nov.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="trips-h">
+    <div class="sec-head"><h2 id="trips-h">Rough itineraries</h2><p>Timed around the flights above</p></div>
+    <div class="trips">
+      <article class="trip">
+        <h3>Taipei</h3>
+        <p class="fl">Lands Wed 05:35 on <code>TR 866</code>. Leaves Sat 01:50 on <code>TR 873</code>, so Friday night is your last night.</p>
+        <ol>
+          <li><span class="day">Wed 23</span><span>Airport MRT into the city (about 40 min) and drop your bags. Breakfast at Fu Hang Dou Jiang, then Dadaocheng and Dihua Street. Rest in the afternoon. Evening at Xinyi district lights and Taipei 101.</span></li>
+          <li><span class="day">Thu 24</span><span>Day trip to Jiufen and Shifen to release a sky lantern. Back by evening for Christmasland in New Taipei City at Banqiao Station Square and New Taipei City Plaza.</span></li>
+          <li><span class="day">Fri 25</span><span>Beitou hot springs in the morning. Elephant Mountain for sunset, then Raohe night market. Airport MRT by about 22:00.</span></li>
+        </ol>
+        <p class="ev">Christmasland runs 13 Nov to 27 Dec 2026 (Kanahei's Small Animals theme this year).</p>
+      </article>
+      <article class="trip">
+        <h3>Busan</h3>
+        <p class="fl">Lands Wed 08:05 on <code>7C 2642</code>. Leaves Sat 17:45 on <code>7C 2641</code>.</p>
+        <ol>
+          <li><span class="day">Wed 23</span><span>Head to Haeundae. Ride the Blueline Park sky capsule along the coast. Evening on Gwangalli beach for the Gwangan Bridge lights.</span></li>
+          <li><span class="day">Thu 24</span><span>Gamcheon Culture Village, then lunch at Jagalchi fish market and BIFF Square street food. Evening at the Christmas Tree Festival on Gwangbok-ro in Nampo-dong.</span></li>
+          <li><span class="day">Fri 25</span><span>Haedong Yonggungsa seaside temple in the morning. Spa Land at Shinsegae Centum City in the afternoon. Dinner in Seomyeon.</span></li>
+          <li><span class="day">Sat 26</span><span>Beomeosa temple or Huinnyeoul Culture Village. Leave for Gimhae airport by 15:00.</span></li>
+        </ol>
+        <p class="ev">The tree festival usually runs from late November into early January. 2026 dates weren't published yet when I checked on 14 Nov.</p>
+      </article>
+      <article class="trip">
+        <h3>Hong Kong</h3>
+        <p class="fl">Lands Wed 20:35 on <code>TR 982</code>. Leaves Sat 22:00 on <code>TR 983</code>.</p>
+        <ol>
+          <li><span class="day">Wed 23</span><span>Airport Express to Kowloon. Late walk along the Tsim Sha Tsui promenade lights.</span></li>
+          <li><span class="day">Thu 24</span><span>Peak Tram in the morning. WinterFest's Christmas Town at Statue Square (20-metre tree) and the Chater Road light displays. Lee Tung Avenue or Lan Kwai Fong at night, which will be packed.</span></li>
+          <li><span class="day">Fri 25</span><span>Lantau: Ngong Ping 360 cable car, the Big Buddha and Tai O fishing village. Back in Tsim Sha Tsui for the 20:00 Symphony of Lights.</span></li>
+          <li><span class="day">Sat 26</span><span>Disneyland's Christmas parade, or a ferry day trip to Macau. Airport Express by about 19:30.</span></li>
+        </ol>
+        <p class="ev">WinterFest runs 21 Nov to 31 Dec 2026. 25 and 26 Dec are public holidays in Hong Kong, so expect crowds.</p>
+      </article>
+      <article class="trip">
+        <h3>Sapporo</h3>
+        <p class="fl">Lands Wed 17:00 on <code>TR 892</code> via Taipei. Leaves Sat 18:15 on <code>TR 893</code>.</p>
+        <ol>
+          <li><span class="day">Wed 23</span><span>JR rapid train into Sapporo (about 40 min). Evening at Odori Park for the German Christmas Market and White Illumination.</span></li>
+          <li><span class="day">Thu 24</span><span>Day trip to Otaru by JR (about 40 min): the canal, Sakaimachi Street and the music box museum. Back for Christmas Eve at Odori, then ramen in Susukino.</span></li>
+          <li><span class="day">Fri 25</span><span>Half day at Jozankei onsen. Mt Moiwa ropeway for the night view. Last night of the Christmas market.</span></li>
+          <li><span class="day">Sat 26</span><span>Seafood breakfast at Nijo Market, then Hokkaido Shrine. JR to New Chitose by 15:30.</span></li>
+        </ol>
+        <p class="ev">The Christmas market runs 20 Nov to 25 Dec 2026, so you get its last three nights.</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="filters" role="group" aria-label="Filter by December weather">
+    <button type="button" id="f-all" data-f="all" aria-pressed="true">All weather</button>
+    <button type="button" id="f-cold" data-f="cold" aria-pressed="false">Cold winter</button>
+    <button type="button" id="f-mild" data-f="mild" aria-pressed="false">Cool / mild</button>
+    <button type="button" id="f-hot" data-f="hot" aria-pressed="false">Warm / tropical</button>
+  </div>
+
+  <section aria-labelledby="t1-h">
+    <div class="sec-head"><h2 id="t1-h">Under SGD 1,000</h2><p><span id="c1"></span> destinations</p></div>
+    <div class="scroll"><table id="t1"></table></div>
+  </section>
+
+  <section aria-labelledby="t2-h">
+    <div class="sec-head"><h2 id="t2-h">SGD 1,000 – 1,500</h2><p><span id="c2"></span> destinations</p></div>
+    <div class="scroll"><table id="t2"></table></div>
+  </section>
+
+  <section aria-labelledby="t3-h">
+    <div class="sec-head"><h2 id="t3-h">Struck off</h2><p>Over SGD 1,500, or no sensible itinerary</p></div>
+    <div class="scroll"><table id="t3"></table></div>
+  </section>
+
+  <section class="notes" aria-label="Notes">
+    <div>
+      <h3>What changed on 13 Nov</h3>
+      <ul>
+        <li>Added Da Nang (<span>SGD 484</span>, Vietjet nonstop) and Okinawa (<span>SGD 928</span>, Scoot nonstop).</li>
+        <li>Struck off Nagoya: up from <span>SGD 1,472</span> to <span>SGD 1,669</span>.</li>
+        <li>Harbin moved up a band: the cheapest sensible routing is now <span>SGD 1,028</span>.</li>
+        <li>Checked Kaohsiung and Clark but didn't add them. See the struck-off table.</li>
+        <li>Biggest drops: Chengdu (−319), Fukuoka (−276), Goa (−218), Hong Kong (−117), Beijing (−91). Biggest rises: Tokyo (+103), Sapporo (+65), Seoul (+55).</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Cheaper if your dates move</h3>
+      <ul>
+        <li>Guangzhou, 22–24 Dec: <span>SGD 434</span></li>
+        <li>Macau, 22–24 Dec: <span>SGD 496</span></li>
+        <li>Dubai, 20–24 Dec: <span>SGD 544</span></li>
+        <li>Manila, 21–25 Dec: <span>SGD 624</span></li>
+        <li>Cebu, 26–28 Dec: <span>SGD 776</span></li>
+        <li>These are from 8 Nov and weren't rechecked.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Before you book</h3>
+      <ul>
+        <li>"Two tickets" means the outbound and return are booked separately. If one flight is cancelled, the other airline has no duty to rebook you.</li>
+        <li>Agent fares (Trip.com, Kiwi.com and others) are usually cheapest but harder to change. Airline prices are the safer reference.</li>
+        <li>Times are local. +1 means the next day.</li>
+        <li>Christmas events listed are what each city usually runs. Check 2026 dates.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Source: <a href="https://www.google.com/travel/flights" target="_blank" rel="noopener">Google Flights</a>, itineraries priced 13 Nov 2026 (SGT), compared with 8 Nov. Weather is typical December daily low–high. Event dates: <a href="https://christmasland.ntpc.gov.tw/en/" target="_blank" rel="noopener">Christmasland in New Taipei City</a>, <a href="https://thebeat.asia/hong-kong/the-list/events/hong-kong-winterfest-2026" target="_blank" rel="noopener">Hong Kong WinterFest 2026</a>, <a href="https://www.sapporo.travel/event/winter/munich_christmas_market/?lang=en" target="_blank" rel="noopener">German Christmas Market in Sapporo</a>.</footer>
+</div>
+
+<script>
+/* leg: [flight, airline, dep, arr]; layover: "L:text" (prefix "LL:" for long). prev = lowest on 8 Nov (null = new). */
+const T1=[
+ {d:"Kuala Lumpur",low:188,prev:191,lowBy:"Scoot + Teaflight (two tickets)",air:"no single airline booking listed",
+  out:[["TR 442","Scoot","15:00 SIN","16:15 KUL"]],ret:[["AK 701","AirAsia","06:05 KUL","07:15 SIN"]],
+  draw:"Pavilion and Suria KLCC mall displays; low-key",w:"hot",t:"24–32°C"},
+ {d:"Bali",low:272,prev:288,lowBy:"Flightnetwork",air:"SGD 287 (Saudia + Scoot, two tickets)",
+  out:[["SV 856","Saudia","17:10 SIN","20:10 DPS"]],ret:[["TR 281","Scoot","11:10 DPS","13:50 SIN"]],
+  draw:"Resort Christmas dinners; not a festive city",w:"hot",t:"24–31°C, wet season"},
+ {d:"Ho Chi Minh City",low:422,prev:454,lowBy:"eDreams",air:"SGD 452 (Vietjet)",
+  out:[["VJ 816","Vietjet","16:15 SIN","17:20 SGN"]],ret:[["VJ 813","Vietjet","06:50 SGN","10:15 SIN"]],
+  draw:"Crowds around Notre-Dame Cathedral and Nguyen Hue on Christmas Eve",w:"hot",t:"23–31°C"},
+ {d:"Da Nang",low:484,prev:null,lowBy:"hutchgo.com",air:"SGD 505 (Vietjet)",
+  out:[["VJ 882","Vietjet","19:15 SIN","21:05 DAD"]],ret:[["VJ 973","Vietjet","12:00 DAD","15:55 SIN"]],
+  draw:"Hoi An's lantern-lit old town 45 min away; Da Nang's pink cathedral",w:"mild",t:"20–25°C, rainy"},
+ {d:"Bangkok",low:499,prev:484,lowBy:"eDreams + Scoot (two tickets)",air:"SGD 519 (Scoot)",
+  out:[["TR 608","Scoot","06:40 SIN","08:15 BKK"]],ret:[["TR 621","Scoot","22:20 BKK","01:55+1 SIN"]],
+  draw:"Big light shows and markets at CentralWorld and ICONSIAM",w:"hot",t:"22–32°C"},
+ {d:"Chengdu",low:580,prev:899,lowBy:"Jettzy",air:"SGD 587 (China Southern)",
+  out:[["CZ 8118","China Southern","13:15 SIN","17:35 SZX"],"L:3h35 in Shenzhen",["EU 2220","Chengdu Airlines","21:10 SZX","23:45 CTU"]],ret:[["EU 2217","Chengdu Airlines","08:10 CTU","10:35 SZX"],"LL:5h05 in Shenzhen",["CZ 8047","China Southern","15:40 SZX","19:50 SIN"]],
+  draw:"Chunxi Road and mall decorations; modest",w:"cold",t:"3–10°C"},
+ {d:"Taipei",low:584,prev:665,lowBy:"wego",air:"SGD 678 (Scoot); 596 on two tickets",
+  out:[["TR 866","Scoot","00:55 SIN","05:35 TPE"]],ret:[["TR 873","Scoot","01:50 TPE","06:30 SIN"]],
+  draw:"New Taipei Christmasland in Banqiao; Xinyi district lights",w:"mild",t:"15–20°C"},
+ {d:"Jeju",low:601,prev:642,lowBy:"hutchgo.com",air:"SGD 692 (Scoot); 613 on two tickets",
+  out:[["TR 838","Scoot","00:25 SIN","07:20 CJU"]],ret:[["TR 839","Scoot","08:55 CJU","14:15 SIN"]],
+  draw:"Winter scenery more than Christmas events",w:"cold",t:"4–10°C"},
+ {d:"Hanoi",low:648,prev:661,lowBy:"Jettzy (two tickets)",air:"not listed; Trip.com SGD 690",
+  out:[["VN 650","Vietnam Airlines","13:15 SIN","14:30 SGN"],"L:2h10 in Ho Chi Minh City",["VN 252","Vietnam Airlines","16:40 SGN","18:50 HAN"]],ret:[["VN 661","Vietnam Airlines","08:05 HAN","12:25 SIN"]],
+  draw:"St Joseph's Cathedral and the Old Quarter; cool weather",w:"mild",t:"15–20°C"},
+ {d:"Guangzhou",low:657,prev:617,lowBy:"Cheaptickets.sg",air:"not sold by 9 Air here; Trip.com SGD 684",
+  out:[["AQ 1276","9 Air","01:10 SIN","05:20 CAN"]],ret:[["AQ 1275","9 Air","19:55 CAN","00:10+1 SIN"]],
+  draw:"Mall and Canton Tower lights; modest",w:"mild",t:"12–20°C"},
+ {d:"Beijing",low:658,prev:749,lowBy:"Cheaptickets.sg",air:"SGD 727 (Shenzhen Airlines)",
+  out:[["ZH 228","Shenzhen Airlines","03:00 SIN","07:20 SZX"],"L:2h35 in Shenzhen",["ZH 9103","Shenzhen Airlines","09:55 SZX","13:15 PEK"]],ret:[["ZH 9116","Shenzhen Airlines","07:30 PEK","11:05 SZX"],"L:2h in Shenzhen",["ZH 229","Shenzhen Airlines","13:05 SZX","17:15 SIN"]],
+  draw:"Wangfujing and Sanlitun decorations; very cold",w:"cold",t:"−8–3°C"},
+ {d:"Macau",low:681,prev:762,lowBy:"Cheaptickets.sg",air:"not listed; Trip.com SGD 709",
+  out:[["MF 8676","XiamenAir","03:00 SIN","07:05 XMN"],"LL:4h55 in Xiamen",["MF 8681","XiamenAir","12:00 XMN","13:40 MFM"]],ret:[["MF 8682","XiamenAir","14:40 MFM","16:00 XMN"],"L:1h50 in Xiamen",["MF 885","XiamenAir","17:50 XMN","22:15 SIN"]],
+  draw:"Casino resorts go big on decorations; Hong Kong a ferry away",w:"mild",t:"14–19°C"},
+ {d:"Hong Kong",low:717,prev:834,lowBy:"eDreams",air:"SGD 768 (Scoot); 729 on two tickets",
+  out:[["TR 982","Scoot","16:00 SIN","20:35 HKG"]],ret:[["TR 983","Scoot","22:00 HKG","02:15+1 SIN"]],
+  draw:"Winterfest, harbourfront light shows, Disneyland",w:"mild",t:"15–20°C"},
+ {d:"Shanghai",low:719,prev:769,lowBy:"Mytrip",air:"SGD 764 (China Southern)",
+  out:[["CZ 8118","China Southern","13:15 SIN","17:35 SZX"],"L:3h25 in Shenzhen",["CZ 3589","China Southern","21:00 SZX","23:15 SHA"]],ret:[["CZ 3576","China Southern","10:10 SHA","12:40 SZX"],"L:3h in Shenzhen",["CZ 8047","China Southern","15:40 SZX","19:50 SIN"]],
+  draw:"The Bund, French Concession, Christmas markets",w:"cold",t:"2–9°C"},
+ {d:"Busan",low:757,prev:747,lowBy:"Cheaptickets.sg",air:"SGD 772 (Jeju Air)",
+  out:[["7C 2642","Jeju Air","00:25 SIN","08:05 PUS"]],ret:[["7C 2641","Jeju Air","17:45 PUS","23:25 SIN"]],
+  draw:"Nampo-dong Christmas Tree Festival",w:"cold",t:"0–8°C"},
+ {d:"Manila",low:788,prev:852,lowBy:"Kiwi.com",air:"SGD 845 (AirAsia + Cebu Pacific, two tickets)",
+  out:[["AK 1794","AirAsia","12:10 SIN","14:35 BKI"],"L:4h30 in Kota Kinabalu",["Z2 502","Philippines AirAsia","19:05 BKI","21:15 MNL"]],ret:[["5J 803","Cebu Pacific","20:20 MNL","00:10+1 SIN"]],
+  draw:"Asia's biggest Christmas: Simbang Gabi masses, lantern displays",w:"hot",t:"23–30°C"},
+ {d:"Dubai",low:814,prev:844,lowBy:"Adam Vacations",air:"SGD 831 (Emirates)",
+  out:[["EK 353","Emirates A380","00:30 SIN","04:10 DXB"]],ret:[["EK 354","Emirates A380","03:15 DXB","14:50 SIN"]],
+  draw:"Hotel and souk Christmas markets; pleasant weather",w:"mild",t:"17–25°C"},
+ {d:"Seoul",low:833,prev:778,lowBy:"Kiwi.com",air:"SGD 865 (Jeju Air + Scoot, two tickets)",
+  out:[["7C 2624","Jeju Air","01:10 SIN","08:40 ICN"]],ret:[["TR 843","Scoot","11:25 ICN","17:10 SIN"]],
+  draw:"Lotte World Tower market, Myeongdong, Cheonggyecheon lights",w:"cold",t:"−6–3°C"},
+ {d:"Okinawa",low:928,prev:null,lowBy:"Booking.com (two tickets)",air:"SGD 1,001 (Scoot); 953 on two tickets",
+  out:[["TR 834","Scoot","01:10 SIN","08:00 OKA"]],ret:[["TR 835","Scoot","09:15 OKA","13:50 SIN"]],
+  draw:"Southeast Botanical Gardens winter illumination, Kokusai Street",w:"mild",t:"15–20°C"},
+ {d:"Osaka",low:930,prev:900,lowBy:"eDreams",air:"SGD 1,192 (Peach); 962 on two tickets",
+  out:[["MM 774","Peach","02:15 SIN","09:35 KIX"]],ret:[["MM 773","Peach","18:40 KIX","00:55+1 SIN"]],
+  draw:"Umeda and Midosuji illuminations, Universal Studios Japan",w:"cold",t:"3–10°C"}
+];
+const T2=[
+ {d:"Fukuoka",low:1013,prev:1289,lowBy:"Kiwi.com",air:"SGD 1,083 (Trinity Airways)",
+  out:[["TW 166","Trinity Airways","02:30 SIN","09:30 CJU"],"L:3h10 in Jeju",["TW 227","Trinity Airways","12:40 CJU","13:45 FUK"]],ret:[["TW 228","Trinity Airways","10:30 FUK","11:35 CJU"],"LL:8h10 in Jeju",["TW 165","Trinity Airways","19:45 CJU","01:15+1 SIN"]],
+  draw:"Hakata Station Christmas market, Tenjin lights",w:"cold",t:"4–11°C"},
+ {d:"Harbin",low:1028,prev:999,moved:"Was under SGD 1,000",lowBy:"Mytrip",air:"XiamenAir price hidden; Trip.com SGD 1,058",
+  out:[["MF 8686","XiamenAir","14:15 SIN","19:25 NKG"],"L:2h05 in Nanjing",["MF 8097","XiamenAir","21:30 NKG","00:10+1 HRB"]],ret:[["MF 8094","XiamenAir","09:00 HRB","11:50 YNZ"],"L:45m in Yancheng",["MF 8094","XiamenAir","12:35 YNZ","15:00 XMN"],"L:2h50 in Xiamen",["MF 885","XiamenAir","17:50 XMN","22:15 SIN"]],
+  draw:"Ice and Snow World usually opens in late December",w:"cold",t:"−24 to −13°C",warn:"Lands just after midnight; two stops home"},
+ {d:"Perth",low:1069,prev:1064,lowBy:"Scoot (two tickets)",air:"SGD 1,125 (Scoot)",
+  out:[["TR 52","Scoot","03:15 SIN","08:25 PER"]],ret:[["TR 53","Scoot","10:35 PER","15:50 SIN"]],
+  draw:"Summer Christmas, city lights trail",w:"hot",t:"17–30°C"},
+ {d:"Sydney",low:1099,prev:1073,lowBy:"hutchgo.com",air:"SGD 1,207 (Scoot); 1,119 on two tickets",
+  out:[["TR 40","Scoot","01:15 SIN","12:10 SYD"]],ret:[["TR 41","Scoot","13:25 SYD","18:40 SIN"]],
+  draw:"Beach Christmas, Boxing Day sales",w:"hot",t:"18–26°C"},
+ {d:"Tokyo",low:1108,prev:1005,lowBy:"Scoot (two tickets)",air:"SGD 1,270 (Scoot)",
+  out:[["TR 866","Scoot","00:55 SIN","05:35 TPE"],"L:1h15 in Taipei",["TR 866","Scoot","06:50 TPE","10:55 NRT"]],ret:[["TR 895","Scoot","08:50 NRT","15:30 SIN"]],
+  draw:"Roppongi and Marunouchi illuminations, Christmas markets",w:"cold",t:"3–12°C",warn:"ZIPAIR nonstop no longer the cheapest pairing"},
+ {d:"Melbourne",low:1137,prev:1085,lowBy:"hutchgo.com",air:"SGD 1,238 (Scoot); 1,161 on two tickets",
+  out:[["TR 38","Scoot","10:55 SIN","21:20 MEL"]],ret:[["TR 59","Scoot","13:25 MEL","18:20 SIN"]],
+  draw:"Myer Christmas windows, Federation Square; summer",w:"hot",t:"13–25°C"},
+ {d:"Sapporo",low:1181,prev:1116,lowBy:"Scoot (two tickets)",air:"SGD 1,392 (Scoot)",
+  out:[["TR 892","Scoot","06:10 SIN","11:00 TPE"],"L:1h15 in Taipei",["TR 892","Scoot","12:15 TPE","17:00 CTS"]],ret:[["TR 893","Scoot","18:15 CTS","22:05 TPE"],"L:1h15 in Taipei",["TR 893","Scoot","23:20 TPE","04:00+1 SIN"]],
+  draw:"Snow, Odori Park Christmas market, White Illumination",w:"cold",t:"−6–0°C"},
+ {d:"Goa",low:1184,prev:1402,lowBy:"Flightnetwork",air:"not listed; Booking.com SGD 1,224",
+  out:[["AI 2116","Air India","13:10 SIN","16:45 DEL"],"L:3h10 in Delhi",["IX 1021","Air India Express","19:55 DEL","22:35 GOX"]],ret:[["IX 1109","Air India Express","17:20 GOX","20:05 DEL"],"L:2h30 in Delhi",["AI 2380","Air India","22:35 DEL","07:00+1 SIN"]],
+  draw:"Midnight mass at old churches, beach parties",w:"hot",t:"20–33°C",warn:"Lands back in Singapore Sun 27 Dec, 7am"},
+ {d:"Cebu",low:1286,prev:1262,lowBy:"eDreams",air:"SGD 1,309 (Cebu Pacific)",
+  out:[["5J 548","Cebu Pacific","01:25 SIN","05:20 CEB"]],ret:[["5J 547","Cebu Pacific","20:40 CEB","00:25+1 SIN"]],
+  draw:"Filipino Christmas, Simbang Gabi masses",w:"hot",t:"24–30°C"}
+];
+const T3=[
+ {d:"Nagoya",when:"Struck 13 Nov",low:1669,prev:1472,why:"Rose above SGD 1,500. Cheapest is now Cathay via Hong Kong (SGD 1,671 with Cathay).",
+  route:"CX 658 + CX 532 via HKG, 10:00 → 21:00; back CX 539 + CX 715, 15:15 → 00:20+1"},
+ {d:"Brisbane",when:"Struck 8 Nov",low:1899,prev:1919,why:"Still over budget. Only sensible option is SIA nonstop (SGD 2,628 with SIA; 1,899 with SIA + Virgin on two tickets).",
+  route:"SQ 255 00:55 → 10:45; back SQ 236 14:35 → 20:25"},
+ {d:"Auckland",when:"Struck 8 Nov",low:2021,prev:2166,why:"Still over budget (SGD 2,162 with Air New Zealand).",
+  route:"NZ 283 18:45 → 09:40 Thu; back NZ 280 17:05 → 22:40"},
+ {d:"Vienna / Europe",when:"Struck 8 Nov",low:1439,prev:1439,why:"17+ hours each way. Not workable for three days. Not rechecked.",route:"—"},
+ {d:"Clark",when:"Checked 13 Nov, not added",low:1579,prev:null,why:"No nonstop on these dates; cheapest goes via Cebu (SGD 1,901 with Cebu Pacific). Pampanga's giant lantern festival is usually the weekend before Christmas anyway.",
+  route:"5J 548 + 5J 4304 via CEB, 01:25 → 08:50; back 5J 535 08:50 → 12:40"},
+ {d:"Kaohsiung",when:"Checked 13 Nov, not added",low:596,prev:null,why:"No nonstop. The SGD 596 fare has a 16-hour layover in Ho Chi Minh City; sensible one-stops start around SGD 870–990. Taipei is cheaper and nonstop.",
+  route:"AirAsia via KUL out (overnight); Vietjet via SGN back"}
+];
+const label={cold:"Cold winter",mild:"Cool / mild",hot:"Warm"};
+const cols=[["Destination","d"],["Price","low"],["Out · Wed 23 Dec","out"],["Back · Sat 26 Dec","ret"],["Christmas draw","draw"],["Weather","w"]];
+let filter="all";
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const fmt=n=>n.toLocaleString("en-SG");
+function delta(r){
+  if(r.prev==null) return `<span class="delta flat">New on 13 Nov</span>`;
+  const d=r.low-r.prev; if(d===0) return `<span class="delta flat">Same as 8 Nov</span>`;
+  return `<span class="delta ${d<0?"down":"up"}">${d<0?"▼":"▲"} ${fmt(Math.abs(d))} vs 8 Nov (${fmt(r.prev)})</span>`;
+}
+function legs(arr){return arr.map(x=>{
+  if(typeof x==="string"){const long=x.startsWith("LL:");return `<span class="lay${long?" long":""}">${esc(x.replace(/^LL?:/,""))} layover</span>`;}
+  return `<div class="leg"><span><span class="fn">${esc(x[0])}</span> <span class="al">${esc(x[1])}</span></span><span class="tm">${esc(x[2])} → ${esc(x[3])}</span></div>`;
+}).join("");}
+function render(id,rows,state){
+  const t=document.getElementById(id);
+  const data=rows.filter(r=>filter==="all"||r.w===filter).slice();
+  const k=cols[state.key][1];
+  data.sort((a,b)=>{const x=a[k],y=b[k];const c=typeof x==="number"?x-y:String(x).localeCompare(String(y));return state.dir*c;});
+  const sortable=new Set([0,1,5]);
+  const head="<thead><tr>"+cols.map((c,i)=>sortable.has(i)?`<th scope="col"><button type="button" data-i="${i}" aria-sort="${state.key===i?(state.dir>0?"ascending":"descending"):"none"}">${c[0]}</button></th>`:`<th scope="col">${c[0]}</th>`).join("")+"</tr></thead>";
+  const body="<tbody>"+data.map(r=>`<tr>
+    <td class="dest">${esc(r.d)}${r.prev==null?'<span class="new">New</span>':""}${r.moved?`<span class="moved">${esc(r.moved)}</span>`:""}</td>
+    <td class="price"><span class="big">SGD ${fmt(r.low)}</span>${delta(r)}<span class="sub">Lowest via ${esc(r.lowBy)}</span><span class="sub">Airline: ${esc(r.air)}</span></td>
+    <td class="legs">${legs(r.out)}</td>
+    <td class="legs">${legs(r.ret)}</td>
+    <td class="draw">${esc(r.draw)}${r.warn?`<span class="warn">${esc(r.warn)}</span>`:""}</td>
+    <td><span class="chip ${r.w}">${label[r.w]}</span><span class="sub">${esc(r.t)}</span></td></tr>`).join("")+"</tbody>";
+  t.innerHTML=head+body;
+  t.querySelectorAll("th button").forEach(b=>b.addEventListener("click",()=>{const i=+b.dataset.i;if(state.key===i)state.dir*=-1;else{state.key=i;state.dir=1;}render(id,rows,state);}));
+  return data.length;
+}
+function renderStruck(){
+  const t=document.getElementById("t3");
+  t.innerHTML=`<thead><tr><th scope="col">Destination</th><th scope="col">Cheapest found</th><th scope="col">Why</th><th scope="col">Flights</th></tr></thead><tbody>`+
+    T3.map(r=>`<tr><td class="dest"><s>${esc(r.d)}</s><span class="moved">${esc(r.when)}</span></td>
+      <td class="price"><span class="big">SGD ${fmt(r.low)}</span>${r.prev!=null&&r.when.startsWith("Struck 8")&&r.prev!==r.low?`<span class="delta flat">8 Nov: ${fmt(r.prev)}</span>`:r.prev!=null&&r.when.startsWith("Struck 13")?delta(r):""}</td>
+      <td class="draw">${esc(r.why)}</td><td class="tm">${esc(r.route)}</td></tr>`).join("")+"</tbody>";
+}
+const s1={key:1,dir:1},s2={key:1,dir:1};
+function all(){document.getElementById("c1").textContent=render("t1",T1,s1);document.getElementById("c2").textContent=render("t2",T2,s2);}
+document.querySelectorAll(".filters button").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.f;document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));all();}));
+all(); renderStruck();
+</script>
+
+</body>
+</html>
