@@ -83,7 +83,7 @@ td.draw{min-width:220px;max-width:300px}
 .filters button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;border-radius:999px;cursor:pointer}
 .filters button[aria-pressed="true"]{background:var(--pine);border-color:var(--pine);color:var(--bg)}
 .filters button:focus-visible{outline:2px solid var(--pine);outline-offset:2px}
-.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px}
 .notes div{min-width:0}
 .notes h3{font-family:var(--display);font-size:17px;margin:0 0 8px}
 .notes ul{margin:0;padding-left:18px;display:grid;gap:6px}
@@ -95,9 +95,13 @@ td.draw{min-width:220px;max-width:300px}
 .tp{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:600;font-size:14px}
 .bb{justify-self:start;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--pine);background:var(--pine-soft);padding:2px 8px;border-radius:4px}
 .trip:target{outline:2px solid var(--pine);outline-offset:2px}
-td.dest a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--muted)}
-td.dest a:hover,td.dest a:focus-visible{color:var(--pine);border-color:var(--pine)}
-.itl{display:block;font-size:12px;font-weight:500;margin-top:2px}
+.itl{display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-family:var(--body);font-size:12.5px;font-weight:600;color:var(--pine);background:var(--pine-soft);padding:4px 10px;border-radius:999px;text-decoration:none;white-space:nowrap}
+.itl:hover{text-decoration:underline}
+.itl:focus-visible,.back:focus-visible{outline:2px solid var(--pine);outline-offset:2px}
+.dn{display:block}
+.back{justify-self:start;font-size:13px;font-weight:600;color:var(--pine);text-decoration:none}
+.back:hover{text-decoration:underline}
+tr:target td{background:var(--pine-soft)}
 .trip .fl{font-size:13px;color:var(--muted);margin:0}
 .trip .fl code{font-family:var(--mono);font-size:12px;color:var(--ink)}
 .trip ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
@@ -128,21 +132,35 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
   th,td{display:block;padding:0;border:0;min-width:0 !important;max-width:none !important;white-space:normal}
   td[data-label]::before{content:attr(data-label);display:block;margin-bottom:4px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
   td.dest::before{display:none}
+  td.price,td.dest,td.tm{white-space:normal}
+  .tm{overflow-wrap:anywhere}
   td.dest{font-family:var(--display);font-size:19px}
   td.dest .moved,td.dest .new{font-family:var(--body)}
   td.legs{border-top:1px solid var(--line);padding-top:10px}
-  section[id],.trip{scroll-margin-top:128px}
 }
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
-section[id],.trip{scroll-margin-top:76px}
+section[id],.trip,tr[id]{scroll-margin-top:var(--navh,80px)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
 .jump{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-block:10px;margin-block:-18px}
 .wrap>*{min-width:0}
 .jump-inner{display:flex;gap:8px;align-items:center}
 .links{flex:1;min-width:0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
 .links::-webkit-scrollbar{display:none}
-@media (max-width:720px){.jump-inner{flex-wrap:wrap}.jump .jump-inner select{flex:1 1 100%;max-width:none;margin-left:0}}
+@media (max-width:900px){
+  .jump-inner{flex-wrap:wrap}
+  .jump .jump-inner select{flex:1 1 100%;max-width:none;margin-left:0}
+  .jump .links{flex:1 1 100%;display:grid;grid-template-columns:repeat(6,auto);justify-content:start;overflow:visible;-webkit-mask-image:none;mask-image:none}
+}
+@media (max-width:600px){
+  .jump .links{grid-template-columns:repeat(3,minmax(0,1fr));justify-content:stretch}
+  .jump .links a{text-align:center;padding:6px 4px;font-size:12.5px;overflow:hidden;text-overflow:ellipsis}
+  .jump .links a .n{display:none}
+}
+@media (max-width:360px){
+  .jump .links{gap:4px}
+  .jump .links a{font-size:11.5px;padding:6px 2px;letter-spacing:-.01em}
+}
 .jump a{flex:none;font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);white-space:nowrap}
 .jump a .n{font-family:var(--mono);font-weight:500;color:var(--muted);font-size:12px}
 .jump a:hover{border-color:var(--pine)}
@@ -161,7 +179,7 @@ footer a{color:var(--pine)}
     <div class="eyebrow">Singapore return trips · out Wed 23 Dec, back Sat 26 Dec 2026</div>
     <h1>Christmas Getaway Fares</h1>
     <span class="stamp">Re-priced 13 Nov 2026 · changes shown against 8 Nov</span>
-    <p class="lede">Tap a destination for its rough itinerary. Each row is a real round trip priced on Google Flights: the cheapest outbound and return of 12 hours or less each way, with flight numbers and local times. "Lowest" is the cheapest seller Google listed (often a travel agent); "Airline" is the price booking with the airline itself. One adult, economy, taxes in, checked bags extra on budget carriers. Fares will move.</p>
+    <p class="lede">Every destination has a "See itinerary" link to its rough plan. Each row is a real round trip priced on Google Flights: the cheapest outbound and return of 12 hours or less each way, with flight numbers and local times. "Lowest" is the cheapest seller Google listed (often a travel agent); "Airline" is the price booking with the airline itself. One adult, economy, taxes in, checked bags extra on budget carriers. Fares will move.</p>
   </header>
 
   <nav class="jump" aria-label="Page sections">
@@ -510,7 +528,7 @@ function renderTrips(){
     <div class="trip-h"><h3>${esc(r.d)}</h3><span class="tp">SGD ${fmt(r.low)}</span></div>${BEST.has(r.d)?'<span class="bb">Best bet</span>':""}
     <p class="fl">${esc(it.fl)}</p>
     <ol>${it.days.map(d=>`<li><span class="day">${esc(d[0])}</span><span>${esc(d[1])}</span></li>`).join("")}</ol>
-    ${it.ev?`<p class="ev">${esc(it.ev)}</p>`:""}</article>`;}).join("");
+    ${it.ev?`<p class="ev">${esc(it.ev)}</p>`:""}<a class="back" href="#row-${slug(r.d)}">↑ Back to ${esc(r.d)} fares</a></article>`;}).join("");
 }
 
 const label={cold:"Cold winter",mild:"Cool / mild",hot:"Warm"};
@@ -534,8 +552,8 @@ function render(id,rows,state){
   data.sort((a,b)=>{const x=a[k],y=b[k];const c=typeof x==="number"?x-y:String(x).localeCompare(String(y));return state.dir*c;});
   const sortable=new Set([0,1,5]);
   const head="<thead><tr>"+cols.map((c,i)=>sortable.has(i)?`<th scope="col"><button type="button" data-i="${i}" aria-sort="${state.key===i?(state.dir>0?"ascending":"descending"):"none"}">${c[0]}</button></th>`:`<th scope="col">${c[0]}</th>`).join("")+"</tr></thead>";
-  const body="<tbody>"+data.map(r=>`<tr>
-    <td class="dest" data-label="Destination"><a href="#${slug(r.d)}">${esc(r.d)}</a>${r.prev==null?'<span class="new">New</span>':""}${r.moved?`<span class="moved">${esc(r.moved)}</span>`:""}</td>
+  const body="<tbody>"+data.map(r=>`<tr id="row-${slug(r.d)}">
+    <td class="dest" data-label="Destination"><span class="dn">${esc(r.d)}</span>${r.prev==null?'<span class="new">New</span>':""}${r.moved?`<span class="moved">${esc(r.moved)}</span>`:""}<a class="itl" href="#${slug(r.d)}">See itinerary ↓</a></td>
     <td class="price" data-label="Price"><span class="big">SGD ${fmt(r.low)}</span>${delta(r)}<span class="sub">Lowest via ${esc(r.lowBy)}</span><span class="sub">Airline: ${esc(r.air)}</span></td>
     <td class="legs" data-label="Out · Wed 23 Dec">${legs(r.out)}</td>
     <td class="legs" data-label="Back · Sat 26 Dec">${legs(r.ret)}</td>
@@ -580,8 +598,12 @@ document.querySelectorAll(".filters button,th button").forEach(b=>b.addEventList
   sel.addEventListener("change",()=>{if(!sel.value)return;const el=document.getElementById(sel.value);if(el){location.hash=sel.value;el.scrollIntoView();el.focus&&el.setAttribute("tabindex","-1");el.focus({preventScroll:true});}sel.value="";});
   const links=[...document.querySelectorAll(".jump a")];
   const secs=links.map(a=>document.getElementById(a.dataset.s)).filter(Boolean);
+  const jumpEl=document.querySelector(".jump");
+  function navH(){return jumpEl.offsetHeight;}
+  function setNavH(){document.documentElement.style.setProperty("--navh",(navH()+12)+"px");}
+  setNavH();addEventListener("resize",setNavH);
   function mark(){
-    const y=window.scrollY+110;let cur=null;
+    const y=window.scrollY+navH()+30;let cur=null;
     for(const s of secs){if(s.offsetTop<=y)cur=s.id;}
     links.forEach(a=>a.setAttribute("aria-current",String(a.dataset.s===cur)));
     const on=links.find(a=>a.dataset.s===cur);
@@ -591,6 +613,7 @@ document.querySelectorAll(".filters button,th button").forEach(b=>b.addEventList
   let t=0;window.addEventListener("scroll",()=>{if(!t)t=requestAnimationFrame(()=>{t=0;mark();});},{passive:true});
   mark();
   document.getElementById("to-top").addEventListener("click",()=>window.scrollTo({top:0}));
+  document.addEventListener("click",e=>{const a=e.target.closest("a.back");if(!a)return;const id=a.getAttribute("href").slice(1);if(!document.getElementById(id)){document.getElementById("f-all").click();}});
 })();
 </script>
 
