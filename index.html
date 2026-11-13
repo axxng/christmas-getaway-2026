@@ -13,17 +13,17 @@ body{margin:0}
 /* Layout: one reading column; best bets, two sortable itinerary tables with flight-by-flight legs, a struck-off table, then notes. */
 :root{
   --bg:#f6f7f5; --surface:#ffffff; --ink:#18211e; --muted:#5b6862; --line:#dde3df;
-  --pine:#1f5c4a; --pine-soft:#e3efe9; --berry:#9b2c3c; --berry-soft:#f6e4e7; --snow:#e8eef6; --snow-ink:#2c4a6e;
+  --pine:#1f5c4a; --pine-soft:#e3efe9; --berry:#9b2c3c; --berry-soft:#f6e4e7; --snow:#e8eef6; --snow-ink:#2c4a6e; --shade:rgba(24,33,30,.16);
   --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#121815; --surface:#18201c; --ink:#e7ece9; --muted:#9aa8a1; --line:#2a3530;
-  --pine:#6cc3a3; --pine-soft:#1c3129; --berry:#f08a99; --berry-soft:#3a1f25; --snow:#1e2836; --snow-ink:#a9c4e6; color-scheme:dark}}
+  --pine:#6cc3a3; --pine-soft:#1c3129; --berry:#f08a99; --berry-soft:#3a1f25; --snow:#1e2836; --snow-ink:#a9c4e6; --shade:rgba(0,0,0,.55); color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#121815; --surface:#18201c; --ink:#e7ece9; --muted:#9aa8a1; --line:#2a3530;
-  --pine:#6cc3a3; --pine-soft:#1c3129; --berry:#f08a99; --berry-soft:#3a1f25; --snow:#1e2836; --snow-ink:#a9c4e6; color-scheme:dark}
+  --pine:#6cc3a3; --pine-soft:#1c3129; --berry:#f08a99; --berry-soft:#3a1f25; --snow:#1e2836; --snow-ink:#a9c4e6; --shade:rgba(0,0,0,.55); color-scheme:dark}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
 .wrap{max-width:1280px;margin:0 auto;padding-block:32px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:36px}
 header{display:grid;gap:10px}
@@ -38,7 +38,8 @@ h2{font-family:var(--display);font-size:24px;margin:0;text-wrap:balance}
 .pick .tag{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .pick p{margin:0;color:var(--muted);font-size:14px}
 .pick code{font-family:var(--mono);font-size:13px;color:var(--ink)}
-section{display:grid;gap:12px}
+section{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.sbox,.scroll{min-width:0}
 .sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px}
 .sec-head p{margin:0;color:var(--muted);font-size:14px}
 .scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
@@ -104,6 +105,53 @@ td.dest a:hover,td.dest a:focus-visible{color:var(--pine);border-color:var(--pin
 .trip .day{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--pine);padding-top:2px}
 .trip .ev{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin:0}
 footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+.sbox{position:relative}
+.sbox::before,.sbox::after{content:"";position:absolute;top:1px;bottom:1px;width:36px;pointer-events:none;opacity:0;transition:opacity .2s;z-index:2}
+.sbox::before{left:1px;border-radius:10px 0 0 10px;background:linear-gradient(to right,var(--shade),transparent)}
+.sbox::after{right:1px;border-radius:0 10px 10px 0;background:linear-gradient(to left,var(--shade),transparent)}
+.sbox[data-l="1"]::before,.sbox[data-r="1"]::after{opacity:1}
+.hint{display:flex;align-items:center;gap:10px;margin:0;font-size:13px;font-weight:600;color:var(--pine)}
+.hint button{font:inherit;font-size:15px;line-height:1;color:var(--pine);background:var(--pine-soft);border:1px solid transparent;border-radius:999px;width:32px;height:28px;cursor:pointer}
+.hint button:disabled{opacity:.35;cursor:default}
+.hint button:focus-visible{outline:2px solid var(--pine);outline-offset:2px}
+.links[data-r="1"]{-webkit-mask-image:linear-gradient(to right,#000 80%,transparent);mask-image:linear-gradient(to right,#000 80%,transparent)}
+.links[data-l="1"]{-webkit-mask-image:linear-gradient(to right,transparent,#000 20%);mask-image:linear-gradient(to right,transparent,#000 20%)}
+.links[data-l="1"][data-r="1"]{-webkit-mask-image:linear-gradient(to right,transparent,#000 15%,#000 85%,transparent);mask-image:linear-gradient(to right,transparent,#000 15%,#000 85%,transparent)}
+@media (max-width:760px){
+  .hint{display:none}
+  .sbox::before,.sbox::after{display:none}
+  .scroll{overflow:visible;background:none;border:0;border-radius:0}
+  table,#t3{min-width:0;display:block}
+  thead{display:none}
+  tbody{display:grid;gap:12px}
+  tr{display:grid;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px}
+  th,td{display:block;padding:0;border:0;min-width:0 !important;max-width:none !important;white-space:normal}
+  td[data-label]::before{content:attr(data-label);display:block;margin-bottom:4px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  td.dest::before{display:none}
+  td.dest{font-family:var(--display);font-size:19px}
+  td.dest .moved,td.dest .new{font-family:var(--body)}
+  td.legs{border-top:1px solid var(--line);padding-top:10px}
+  section[id],.trip{scroll-margin-top:128px}
+}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+section[id],.trip{scroll-margin-top:76px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.jump{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-block:10px;margin-block:-18px}
+.wrap>*{min-width:0}
+.jump-inner{display:flex;gap:8px;align-items:center}
+.links{flex:1;min-width:0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.links::-webkit-scrollbar{display:none}
+@media (max-width:720px){.jump-inner{flex-wrap:wrap}.jump .jump-inner select{flex:1 1 100%;max-width:none;margin-left:0}}
+.jump a{flex:none;font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);white-space:nowrap}
+.jump a .n{font-family:var(--mono);font-weight:500;color:var(--muted);font-size:12px}
+.jump a:hover{border-color:var(--pine)}
+.jump a[aria-current="true"]{background:var(--pine);border-color:var(--pine);color:var(--bg)}
+.jump a[aria-current="true"] .n{color:var(--bg)}
+.jump a:focus-visible,.jump select:focus-visible,.to-top:focus-visible{outline:2px solid var(--pine);outline-offset:2px}
+.jump select{flex:none;margin-left:auto;font:inherit;font-size:13px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 10px;max-width:220px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.to-top{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;font:inherit;font-size:13px;font-weight:600;color:var(--bg);background:var(--pine);border:0;border-radius:999px;padding:10px 14px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18)}
 footer a{color:var(--pine)}
 </style>
 </head>
@@ -116,7 +164,22 @@ footer a{color:var(--pine)}
     <p class="lede">Tap a destination for its rough itinerary. Each row is a real round trip priced on Google Flights: the cheapest outbound and return of 12 hours or less each way, with flight numbers and local times. "Lowest" is the cheapest seller Google listed (often a travel agent); "Airline" is the price booking with the airline itself. One adult, economy, taxes in, checked bags extra on budget carriers. Fares will move.</p>
   </header>
 
-  <section aria-labelledby="picks-h">
+  <nav class="jump" aria-label="Page sections">
+    <div class="jump-inner">
+      <div class="links">
+      <a href="#best" data-s="best">Best bets</a>
+      <a href="#under-1000" data-s="under-1000">Under 1,000 <span class="n" id="n1"></span></a>
+      <a href="#sgd-1000-1500" data-s="sgd-1000-1500">1,000–1,500 <span class="n" id="n2"></span></a>
+      <a href="#struck-off" data-s="struck-off">Struck off <span class="n" id="n3"></span></a>
+      <a href="#itineraries" data-s="itineraries">Itineraries</a>
+      <a href="#notes" data-s="notes">Notes</a>
+      </div>
+      <label class="sr" for="dest-jump">Jump to a destination's itinerary</label>
+      <select id="dest-jump"><option value="">Jump to destination…</option></select>
+    </div>
+  </nav>
+
+  <section id="best" aria-labelledby="picks-h">
     <h2 id="picks-h">Best bets</h2>
     <div class="picks">
       <div class="pick"><span class="tag">Best value</span><b>Taipei · from SGD 584</b><p>Scoot <code>TR 866</code> 00:55 out, <code>TR 873</code> 01:50 back. Down SGD 81 since 8 Nov. Scoot direct SGD 596 on two tickets.</p></div>
@@ -133,27 +196,30 @@ footer a{color:var(--pine)}
     <button type="button" id="f-hot" data-f="hot" aria-pressed="false">Warm / tropical</button>
   </div>
 
-  <section aria-labelledby="t1-h">
+  <section id="under-1000" aria-labelledby="t1-h">
     <div class="sec-head"><h2 id="t1-h">Under SGD 1,000</h2><p><span id="c1"></span> destinations</p></div>
-    <div class="scroll"><table id="t1"></table></div>
+    <p class="hint" data-for="s1" hidden><button type="button" data-dir="-1" aria-label="Scroll table left">←</button><span>Scroll sideways to see every column</span><button type="button" data-dir="1" aria-label="Scroll table right">→</button></p>
+    <div class="sbox"><div class="scroll" id="s1"><table id="t1"></table></div></div>
   </section>
 
-  <section aria-labelledby="t2-h">
+  <section id="sgd-1000-1500" aria-labelledby="t2-h">
     <div class="sec-head"><h2 id="t2-h">SGD 1,000 – 1,500</h2><p><span id="c2"></span> destinations</p></div>
-    <div class="scroll"><table id="t2"></table></div>
+    <p class="hint" data-for="s2" hidden><button type="button" data-dir="-1" aria-label="Scroll table left">←</button><span>Scroll sideways to see every column</span><button type="button" data-dir="1" aria-label="Scroll table right">→</button></p>
+    <div class="sbox"><div class="scroll" id="s2"><table id="t2"></table></div></div>
   </section>
 
-  <section aria-labelledby="t3-h">
+  <section id="struck-off" aria-labelledby="t3-h">
     <div class="sec-head"><h2 id="t3-h">Struck off</h2><p>Over SGD 1,500, or no sensible itinerary</p></div>
-    <div class="scroll"><table id="t3"></table></div>
+    <p class="hint" data-for="s3" hidden><button type="button" data-dir="-1" aria-label="Scroll table left">←</button><span>Scroll sideways to see every column</span><button type="button" data-dir="1" aria-label="Scroll table right">→</button></p>
+    <div class="sbox"><div class="scroll" id="s3"><table id="t3"></table></div></div>
   </section>
 
-  <section aria-labelledby="trips-h">
+  <section id="itineraries" aria-labelledby="trips-h">
     <div class="sec-head"><h2 id="trips-h">Rough itineraries</h2><p>All destinations, cheapest first, timed around the flights in the tables</p></div>
     <div class="trips" id="trips"></div>
   </section>
 
-  <section class="notes" aria-label="Notes">
+  <section id="notes" class="notes" aria-label="Notes">
     <div>
       <h3>What changed on 13 Nov</h3>
       <ul>
@@ -186,6 +252,7 @@ footer a{color:var(--pine)}
     </div>
   </section>
 
+  <button type="button" id="to-top" class="to-top" aria-label="Back to top" hidden>↑ Top</button>
   <footer>Source: <a href="https://www.google.com/travel/flights" target="_blank" rel="noopener">Google Flights</a>, itineraries priced 13 Nov 2026 (SGT), compared with 8 Nov. Weather is typical December daily low–high. Event dates: <a href="https://christmasland.ntpc.gov.tw/en/" target="_blank" rel="noopener">Christmasland in New Taipei City</a>, <a href="https://thebeat.asia/hong-kong/the-list/events/hong-kong-winterfest-2026" target="_blank" rel="noopener">Hong Kong WinterFest 2026</a>, <a href="https://www.sapporo.travel/event/winter/munich_christmas_market/?lang=en" target="_blank" rel="noopener">German Christmas Market in Sapporo</a>.</footer>
 </div>
 
@@ -468,12 +535,12 @@ function render(id,rows,state){
   const sortable=new Set([0,1,5]);
   const head="<thead><tr>"+cols.map((c,i)=>sortable.has(i)?`<th scope="col"><button type="button" data-i="${i}" aria-sort="${state.key===i?(state.dir>0?"ascending":"descending"):"none"}">${c[0]}</button></th>`:`<th scope="col">${c[0]}</th>`).join("")+"</tr></thead>";
   const body="<tbody>"+data.map(r=>`<tr>
-    <td class="dest"><a href="#${slug(r.d)}">${esc(r.d)}</a>${r.prev==null?'<span class="new">New</span>':""}${r.moved?`<span class="moved">${esc(r.moved)}</span>`:""}</td>
-    <td class="price"><span class="big">SGD ${fmt(r.low)}</span>${delta(r)}<span class="sub">Lowest via ${esc(r.lowBy)}</span><span class="sub">Airline: ${esc(r.air)}</span></td>
-    <td class="legs">${legs(r.out)}</td>
-    <td class="legs">${legs(r.ret)}</td>
-    <td class="draw">${esc(r.draw)}${r.warn?`<span class="warn">${esc(r.warn)}</span>`:""}</td>
-    <td><span class="chip ${r.w}">${label[r.w]}</span><span class="sub">${esc(r.t)}</span></td></tr>`).join("")+"</tbody>";
+    <td class="dest" data-label="Destination"><a href="#${slug(r.d)}">${esc(r.d)}</a>${r.prev==null?'<span class="new">New</span>':""}${r.moved?`<span class="moved">${esc(r.moved)}</span>`:""}</td>
+    <td class="price" data-label="Price"><span class="big">SGD ${fmt(r.low)}</span>${delta(r)}<span class="sub">Lowest via ${esc(r.lowBy)}</span><span class="sub">Airline: ${esc(r.air)}</span></td>
+    <td class="legs" data-label="Out · Wed 23 Dec">${legs(r.out)}</td>
+    <td class="legs" data-label="Back · Sat 26 Dec">${legs(r.ret)}</td>
+    <td class="draw" data-label="Christmas draw">${esc(r.draw)}${r.warn?`<span class="warn">${esc(r.warn)}</span>`:""}</td>
+    <td class="wx" data-label="Weather"><span class="chip ${r.w}">${label[r.w]}</span><span class="sub">${esc(r.t)}</span></td></tr>`).join("")+"</tbody>";
   t.innerHTML=head+body;
   t.querySelectorAll("th button").forEach(b=>b.addEventListener("click",()=>{const i=+b.dataset.i;if(state.key===i)state.dir*=-1;else{state.key=i;state.dir=1;}render(id,rows,state);}));
   return data.length;
@@ -481,14 +548,50 @@ function render(id,rows,state){
 function renderStruck(){
   const t=document.getElementById("t3");
   t.innerHTML=`<thead><tr><th scope="col">Destination</th><th scope="col">Cheapest found</th><th scope="col">Why</th><th scope="col">Flights</th></tr></thead><tbody>`+
-    T3.map(r=>`<tr><td class="dest"><s>${esc(r.d)}</s><span class="moved">${esc(r.when)}</span></td>
-      <td class="price"><span class="big">SGD ${fmt(r.low)}</span>${r.prev!=null&&r.when.startsWith("Struck 8")&&r.prev!==r.low?`<span class="delta flat">8 Nov: ${fmt(r.prev)}</span>`:r.prev!=null&&r.when.startsWith("Struck 13")?delta(r):""}</td>
-      <td class="draw">${esc(r.why)}</td><td class="tm">${esc(r.route)}</td></tr>`).join("")+"</tbody>";
+    T3.map(r=>`<tr><td class="dest" data-label="Destination"><s>${esc(r.d)}</s><span class="moved">${esc(r.when)}</span></td>
+      <td class="price" data-label="Cheapest found"><span class="big">SGD ${fmt(r.low)}</span>${r.prev!=null&&r.when.startsWith("Struck 8")&&r.prev!==r.low?`<span class="delta flat">8 Nov: ${fmt(r.prev)}</span>`:r.prev!=null&&r.when.startsWith("Struck 13")?delta(r):""}</td>
+      <td class="draw" data-label="Why">${esc(r.why)}</td><td class="tm" data-label="Flights">${esc(r.route)}</td></tr>`).join("")+"</tbody>";
 }
 const s1={key:1,dir:1},s2={key:1,dir:1};
 function all(){document.getElementById("c1").textContent=render("t1",T1,s1);document.getElementById("c2").textContent=render("t2",T2,s2);}
 document.querySelectorAll(".filters button").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.f;document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));all();}));
 all(); renderStruck(); renderTrips();
+document.getElementById("n1").textContent=T1.length;
+document.getElementById("n2").textContent=T2.length;
+document.getElementById("n3").textContent=T3.length;
+const watchers=[];
+function watch(el,box,id){
+  const hint=id?document.querySelector(`.hint[data-for="${id}"]`):null;
+  const f=()=>{const over=el.scrollWidth>el.clientWidth+2;const atL=el.scrollLeft<=2;const atR=el.scrollLeft+el.clientWidth>=el.scrollWidth-2;
+    box.dataset.l=over&&!atL?"1":"0";box.dataset.r=over&&!atR?"1":"0";
+    if(hint){hint.hidden=!over;const [b1,b2]=hint.querySelectorAll("button");b1.disabled=atL;b2.disabled=atR;}};
+  el.addEventListener("scroll",f,{passive:true});watchers.push(f);
+  if(hint)hint.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>el.scrollBy({left:+b.dataset.dir*el.clientWidth*.8,behavior:"smooth"})));
+  f();
+}
+["s1","s2","s3"].forEach(id=>{const el=document.getElementById(id);watch(el,el.parentElement,id);});
+watch(document.querySelector(".links"),document.querySelector(".links"));
+const rewatch=()=>watchers.forEach(f=>f());
+addEventListener("resize",rewatch);
+document.querySelectorAll(".filters button,th button").forEach(b=>b.addEventListener("click",()=>setTimeout(rewatch,0)));
+(function(){
+  const sel=document.getElementById("dest-jump");
+  [...T1,...T2].slice().sort((a,b)=>a.d.localeCompare(b.d)).forEach(r=>{const o=document.createElement("option");o.value=slug(r.d);o.textContent=r.d+" · SGD "+fmt(r.low);sel.appendChild(o);});
+  sel.addEventListener("change",()=>{if(!sel.value)return;const el=document.getElementById(sel.value);if(el){location.hash=sel.value;el.scrollIntoView();el.focus&&el.setAttribute("tabindex","-1");el.focus({preventScroll:true});}sel.value="";});
+  const links=[...document.querySelectorAll(".jump a")];
+  const secs=links.map(a=>document.getElementById(a.dataset.s)).filter(Boolean);
+  function mark(){
+    const y=window.scrollY+110;let cur=null;
+    for(const s of secs){if(s.offsetTop<=y)cur=s.id;}
+    links.forEach(a=>a.setAttribute("aria-current",String(a.dataset.s===cur)));
+    const on=links.find(a=>a.dataset.s===cur);
+    if(on){const box=on.parentElement;const l=on.offsetLeft-box.offsetLeft;if(l<box.scrollLeft||l+on.offsetWidth>box.scrollLeft+box.clientWidth)box.scrollLeft=l-12;}
+    document.getElementById("to-top").hidden=window.scrollY<600;
+  }
+  let t=0;window.addEventListener("scroll",()=>{if(!t)t=requestAnimationFrame(()=>{t=0;mark();});},{passive:true});
+  mark();
+  document.getElementById("to-top").addEventListener("click",()=>window.scrollTo({top:0}));
+})();
 </script>
 
 </body>
