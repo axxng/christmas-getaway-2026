@@ -119,6 +119,11 @@ tr:target td{background:var(--pine-soft)}
 .trip .ev{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin:0}
 footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
 .sbox{position:relative}
+.shead{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--navb,56px));height:0;z-index:15;visibility:hidden}
+.shead.on{visibility:visible}
+.shead-in{margin:0 1px;overflow:hidden;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 3px 8px var(--shade)}
+.shead-t{border-collapse:collapse;table-layout:fixed;min-width:0}
+.shead-t th{border-bottom:0}
 .sbox::before,.sbox::after{content:"";position:absolute;top:1px;bottom:1px;width:36px;pointer-events:none;opacity:0;transition:opacity .2s;z-index:2}
 .sbox::before{left:1px;border-radius:10px 0 0 10px;background:linear-gradient(to right,var(--shade),transparent)}
 .sbox::after{right:1px;border-radius:0 10px 10px 0;background:linear-gradient(to left,var(--shade),transparent)}
@@ -131,6 +136,7 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
 .links[data-l="1"]{-webkit-mask-image:linear-gradient(to right,transparent,#000 20%);mask-image:linear-gradient(to right,transparent,#000 20%)}
 .links[data-l="1"][data-r="1"]{-webkit-mask-image:linear-gradient(to right,transparent,#000 15%,#000 85%,transparent);mask-image:linear-gradient(to right,transparent,#000 15%,#000 85%,transparent)}
 @media (max-width:760px){
+  .shead{display:none}
   .hint{display:none}
   .sbox::before,.sbox::after{display:none}
   .scroll{overflow:visible;background:none;border:0;border-radius:0}
@@ -645,6 +651,28 @@ function watch(el,box,id){
 ["s1","s2","s3","s4"].forEach(id=>{const el=document.getElementById(id);watch(el,el.parentElement,id);});
 watch(document.querySelector(".links"),document.querySelector(".links"));
 const rewatch=()=>watchers.forEach(f=>f());
+["t1","t2","t3","t4"].forEach(id=>{
+  const tbl=document.getElementById(id),sc=tbl.parentElement,box=sc.parentElement;
+  const wrap=document.createElement("div");wrap.className="shead";wrap.setAttribute("aria-hidden","true");
+  const inner=document.createElement("div");inner.className="shead-in";wrap.appendChild(inner);box.insertBefore(wrap,sc);
+  const sync=()=>{const t=inner.firstChild;if(t)t.style.transform=`translateX(${-sc.scrollLeft}px)`;};
+  function measure(){const th=tbl.tHead,t=inner.firstChild;if(!th||!t)return;
+    t.style.width=tbl.offsetWidth+"px";const src=th.rows[0].cells,dst=t.tHead.rows[0].cells;
+    for(let i=0;i<src.length;i++){const w=src[i].getBoundingClientRect().width+"px";dst[i].style.width=w;dst[i].style.boxSizing="border-box";}
+    inner.style.width=sc.clientWidth+"px";sync();}
+  function build(){inner.innerHTML="";const th=tbl.tHead;if(!th)return;const t=document.createElement("table");t.className="shead-t";t.appendChild(th.cloneNode(true));inner.appendChild(t);
+    t.querySelectorAll("button").forEach(b=>{b.tabIndex=-1;b.addEventListener("click",()=>{const o=tbl.querySelector(`th button[data-i="${b.dataset.i}"]`);if(o)o.click();});});
+    measure();vis();}
+  function vis(){const th=tbl.tHead;if(!th||getComputedStyle(th).display==="none"){wrap.classList.remove("on");return;}
+    const navb=document.querySelector(".jump").getBoundingClientRect().bottom;const r=th.getBoundingClientRect(),tb=tbl.getBoundingClientRect();
+    wrap.classList.toggle("on",r.top<navb&&tb.bottom>navb+r.height*2);}
+  sc.addEventListener("scroll",sync,{passive:true});
+  new MutationObserver(build).observe(tbl,{childList:true});
+  if(window.ResizeObserver)new ResizeObserver(()=>measure()).observe(tbl);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(measure);
+  addEventListener("resize",()=>{measure();vis();});addEventListener("scroll",vis,{passive:true});
+  build();
+});
 addEventListener("resize",rewatch);
 document.querySelectorAll(".filters button,th button").forEach(b=>b.addEventListener("click",()=>setTimeout(rewatch,0)));
 (function(){
@@ -655,7 +683,7 @@ document.querySelectorAll(".filters button,th button").forEach(b=>b.addEventList
   const secs=links.map(a=>document.getElementById(a.dataset.s)).filter(Boolean);
   const jumpEl=document.querySelector(".jump");
   function navH(){return jumpEl.offsetHeight;}
-  function setNavH(){document.documentElement.style.setProperty("--navh",(navH()+12)+"px");}
+  function setNavH(){document.documentElement.style.setProperty("--navh",(navH()+12)+"px");document.documentElement.style.setProperty("--navb",navH()+"px");}
   setNavH();addEventListener("resize",setNavH);
   function mark(){
     const y=window.scrollY+navH()+30;let cur=null;
