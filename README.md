@@ -8,4 +8,4 @@ Live page: https://axxng.github.io/christmas-getaway-2026/
 - A struck-off table for destinations that went over budget or had no sensible routing
 - A rough itinerary for every destination in both tables, timed around the flights
 
-Fares were last checked on 13 Nov 2026 and will have moved since.
+Fares were last checked on 16 Nov 2026 and will have moved since.
