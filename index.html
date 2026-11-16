@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Round-trip fares from Singapore for 23-26 Dec 2026, with flight details and rough itineraries.">
+<meta name="description" content="Round-trip fares from Singapore for 23-26 Dec 2026, with flight details, trusted-site prices and rough itineraries.">
 <title>Christmas Getaway Fares</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,6 +45,15 @@ section{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
 .scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
 table{border-collapse:collapse;width:100%;min-width:1180px;font-size:14px}
 #t3{min-width:900px}
+#t4{min-width:1080px}
+#t4 td.c{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+#t4 td.best{background:var(--pine-soft);color:var(--pine);font-weight:600}
+#t4 .tk{display:block;font-family:var(--body);font-size:11px;color:var(--muted);font-weight:500}
+#t4 td.best .tk{color:var(--pine)}
+#t4 .gap{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:600}
+#t4 .na{color:var(--muted)}
+.lk.et{color:var(--snow-ink);background:var(--snow)}
+.lk{display:inline-block;margin-top:2px;font-size:11px;font-weight:600;color:var(--berry);background:var(--berry-soft);padding:1px 6px;border-radius:4px}
 th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
 tr:last-child td{border-bottom:0}
 th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;white-space:nowrap;background:var(--surface)}
@@ -125,7 +134,7 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
   .hint{display:none}
   .sbox::before,.sbox::after{display:none}
   .scroll{overflow:visible;background:none;border:0;border-radius:0}
-  table,#t3{min-width:0;display:block}
+  table,#t3,#t4{min-width:0;display:block}
   thead{display:none}
   tbody{display:grid;gap:12px}
   tr{display:grid;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px}
@@ -137,6 +146,9 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
   td.dest{font-family:var(--display);font-size:19px}
   td.dest .moved,td.dest .new{font-family:var(--body)}
   td.legs{border-top:1px solid var(--line);padding-top:10px}
+  #t4 tr{grid-template-columns:1fr 1fr;column-gap:16px}
+  #t4 td.dest,#t4 td.low,#t4 td.gapc{grid-column:1/-1}
+  #t4 td.best{background:none;border-left:3px solid var(--pine);padding-left:8px}
 }
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
@@ -150,16 +162,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 @media (max-width:900px){
   .jump-inner{flex-wrap:wrap}
   .jump .jump-inner select{flex:1 1 100%;max-width:none;margin-left:0}
-  .jump .links{flex:1 1 100%;display:grid;grid-template-columns:repeat(6,auto);justify-content:start;overflow:visible;-webkit-mask-image:none;mask-image:none}
+  .jump .links{flex:1 1 100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));overflow:visible;-webkit-mask-image:none;mask-image:none}
 }
 @media (max-width:600px){
-  .jump .links{grid-template-columns:repeat(3,minmax(0,1fr));justify-content:stretch}
-  .jump .links a{text-align:center;padding:6px 4px;font-size:12.5px;overflow:hidden;text-overflow:ellipsis}
+  .jump .links{grid-template-columns:repeat(4,minmax(0,1fr));justify-content:stretch;gap:5px}
+  .jump .links a{text-align:center;padding:6px 2px;font-size:12px;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.01em}
   .jump .links a .n{display:none}
 }
 @media (max-width:360px){
   .jump .links{gap:4px}
-  .jump .links a{font-size:11.5px;padding:6px 2px;letter-spacing:-.01em}
+  .jump .links a{font-size:10.5px;padding:6px 1px;letter-spacing:-.02em}
 }
 .jump a{flex:none;font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);white-space:nowrap}
 .jump a .n{font-family:var(--mono);font-weight:500;color:var(--muted);font-size:12px}
@@ -178,7 +190,7 @@ footer a{color:var(--pine)}
   <header>
     <div class="eyebrow">Singapore return trips · out Wed 23 Dec, back Sat 26 Dec 2026</div>
     <h1>Christmas Getaway Fares</h1>
-    <span class="stamp">Re-priced 16 Nov 2026 · changes shown against 13 Nov</span>
+    <span class="stamp">Re-priced 16–17 Nov 2026 · changes shown against 13 Nov</span>
     <p class="lede">Every destination has a "See itinerary" link to its rough plan. Each row is a real round trip priced on Google Flights: the cheapest outbound and return of 12 hours or less each way, with flight numbers and local times. "Lowest" is the cheapest seller Google listed (often a travel agent); "Airline" is the price booking with the airline itself. One adult, economy, taxes in, checked bags extra on budget carriers. Fares will move.</p>
   </header>
 
@@ -188,6 +200,7 @@ footer a{color:var(--pine)}
       <a href="#best" data-s="best">Best bets</a>
       <a href="#under-1000" data-s="under-1000">Under 1,000 <span class="n" id="n1"></span></a>
       <a href="#sgd-1000-1500" data-s="sgd-1000-1500">1,000–1,500 <span class="n" id="n2"></span></a>
+      <a href="#compare" data-s="compare">Compare</a>
       <a href="#struck-off" data-s="struck-off">Struck off <span class="n" id="n3"></span></a>
       <a href="#itineraries" data-s="itineraries">Itineraries</a>
       <a href="#notes" data-s="notes">Notes</a>
@@ -200,10 +213,10 @@ footer a{color:var(--pine)}
   <section id="best" aria-labelledby="picks-h">
     <h2 id="picks-h">Best bets</h2>
     <div class="picks">
-      <div class="pick"><span class="tag">Best value</span><b>Taipei · from SGD 585</b><p>Scoot <code>TR 866</code> 00:55 out, <code>TR 873</code> 01:50 back. Flat since 13 Nov. Scoot direct SGD 587 on two tickets.</p></div>
-      <div class="pick"><span class="tag">Real winter</span><b>Busan · from SGD 721</b><p>Jeju Air nonstop both ways, <code>7C 2642</code> 00:25 out, <code>7C 2641</code> 17:45 back. Down SGD 36. SGD 742 with Jeju Air.</p></div>
-      <div class="pick"><span class="tag">Easy timings</span><b>Hong Kong · from SGD 715</b><p>Scoot <code>TR 982</code> 16:00 out, <code>TR 983</code> 22:00 back. Flat since 13 Nov.</p></div>
-      <div class="pick"><span class="tag">Snow</span><b>Sapporo · from SGD 1,180</b><p>Scoot <code>TR 892</code> via Taipei, 1h15 connection each way. Flat since 13 Nov.</p></div>
+      <div class="pick"><span class="tag">Best value</span><b>Taipei · from SGD 583</b><p>Scoot <code>TR 866</code> 00:55 out, <code>TR 873</code> 01:50 back. SGD 593 on Booking.com, 596 with Scoot on two tickets.</p></div>
+      <div class="pick"><span class="tag">Real winter</span><b>Busan · from SGD 720</b><p>Jeju Air nonstop both ways, <code>7C 2642</code> 00:25 out, <code>7C 2641</code> 17:45 back. SGD 738 on Booking.com, 742 with Jeju Air.</p></div>
+      <div class="pick"><span class="tag">Easy timings</span><b>Hong Kong · from SGD 710</b><p>Scoot <code>TR 982</code> 16:00 out, <code>TR 983</code> 22:00 back. SGD 731 on Booking.com, 768 with Scoot.</p></div>
+      <div class="pick"><span class="tag">Snow</span><b>Sapporo · from SGD 1,180</b><p>Scoot <code>TR 892</code> via Taipei, 1h15 connection each way. SGD 1,184 with Scoot on two tickets.</p></div>
     </div>
   </section>
 
@@ -226,6 +239,13 @@ footer a{color:var(--pine)}
     <div class="sbox"><div class="scroll" id="s2"><table id="t2"></table></div></div>
   </section>
 
+  <section id="compare" aria-labelledby="t4-h">
+    <div class="sec-head"><h2 id="t4-h">Trusted sites, side by side</h2><p>Same itineraries as the tables above</p></div>
+    <p class="lede">For each destination's exact flights, the cheapest seller Google Flights listed beside the airline's own price and five well-known booking sites. "—" means that site didn't sell this itinerary. "2 tickets" means the outbound and return are separate bookings. The highlighted cell is the cheapest trusted option, and the last column is how much more it costs than the cheapest seller.</p>
+    <p class="hint" data-for="s4" hidden><button type="button" data-dir="-1" aria-label="Scroll table left">←</button><span>Scroll sideways to see every column</span><button type="button" data-dir="1" aria-label="Scroll table right">→</button></p>
+    <div class="sbox"><div class="scroll" id="s4"><table id="t4"></table></div></div>
+  </section>
+
   <section id="struck-off" aria-labelledby="t3-h">
     <div class="sec-head"><h2 id="t3-h">Struck off</h2><p>Over SGD 1,500, or no sensible itinerary</p></div>
     <p class="hint" data-for="s3" hidden><button type="button" data-dir="-1" aria-label="Scroll table left">←</button><span>Scroll sideways to see every column</span><button type="button" data-dir="1" aria-label="Scroll table right">→</button></p>
@@ -239,14 +259,14 @@ footer a{color:var(--pine)}
 
   <section id="notes" class="notes" aria-label="Notes">
     <div>
-      <h3>What changed on 16 Nov</h3>
+      <h3>What changed on 16–17 Nov</h3>
       <ul>
-        <li>Moved under SGD 1,000: Goa (<span>689</span>, now IndiGo via Mumbai), Perth (<span>949</span>, agent fare) and Harbin (<span>953</span>, one stop home instead of two).</li>
-        <li>Moved up to SGD 1,000–1,500: Osaka (<span>1,008</span>) and Okinawa (<span>1,104</span>).</li>
+        <li>Moved under SGD 1,000: Goa (<span>689</span>, now IndiGo via Mumbai), Perth (<span>949</span>, agent fare only) and Harbin (<span>953</span>, one stop home instead of two).</li>
+        <li>Moved up to SGD 1,000–1,500: Osaka (<span>1,022</span>) and Okinawa (<span>1,093</span>).</li>
         <li>Nothing added or struck off. Nagoya, Brisbane, Auckland and Clark are still over budget, and Kaohsiung still has no nonstop.</li>
-        <li>Biggest drops: Goa (−495), Cebu (−179, now Scoot), Perth (−120), Harbin (−75), Melbourne (−50).</li>
-        <li>Biggest rises: Fukuoka (+222), Okinawa (+176), Macau (+80), Osaka (+78), Jeju (+76).</li>
-        <li>13 routes cheaper, 13 dearer, 3 unchanged.</li>
+        <li>Biggest drops: Goa (−495), Cebu (−204, now Scoot), Perth (−120), Harbin (−75), Hanoi (−58).</li>
+        <li>Biggest rises: Fukuoka (+222), Okinawa (+165), Osaka (+92), Jeju (+71), Macau (+60).</li>
+        <li>16 routes cheaper, 10 dearer, 3 unchanged.</li>
       </ul>
     </div>
     <div>
@@ -261,6 +281,15 @@ footer a{color:var(--pine)}
       </ul>
     </div>
     <div>
+      <h3>About the sellers</h3>
+      <ul>
+        <li>Trusted here means the airline itself, Trip.com, Expedia, Booking.com, Agoda or Traveloka.</li>
+        <li>Gotogate, Mytrip and Flightnetwork are all run by Etraveli Group, which also handles flight bookings for Booking.com.</li>
+        <li>The others (hutchgo.com, Jettzy, Cheaptickets.sg, Teaflight, Kiwi.com, eDreams, ly.com, Alitrip, Airpaz, Adam Vacations, Travomint, wego) I haven't vetted. Some save SGD 10–30; Perth's saves about SGD 100.</li>
+        <li>Booking through any agent means changes and refunds go through the agent, not the airline.</li>
+      </ul>
+    </div>
+    <div>
       <h3>Before you book</h3>
       <ul>
         <li>"Two tickets" means the outbound and return are booked separately. If one flight is cancelled, the other airline has no duty to rebook you.</li>
@@ -272,7 +301,7 @@ footer a{color:var(--pine)}
   </section>
 
   <button type="button" id="to-top" class="to-top" aria-label="Back to top" hidden>↑ Top</button>
-  <footer>Source: <a href="https://www.google.com/travel/flights" target="_blank" rel="noopener">Google Flights</a>, itineraries priced 16 Nov 2026 (SGT), compared with 13 Nov. Weather is typical December daily low–high. Event dates: <a href="https://christmasland.ntpc.gov.tw/en/" target="_blank" rel="noopener">Christmasland in New Taipei City</a>, <a href="https://thebeat.asia/hong-kong/the-list/events/hong-kong-winterfest-2026" target="_blank" rel="noopener">Hong Kong WinterFest 2026</a>, <a href="https://www.sapporo.travel/event/winter/munich_christmas_market/?lang=en" target="_blank" rel="noopener">German Christmas Market in Sapporo</a>.</footer>
+  <footer>Source: <a href="https://www.google.com/travel/flights" target="_blank" rel="noopener">Google Flights</a>, itineraries priced 16–17 Nov 2026 (SGT), compared with 13 Nov. Seller ownership: <a href="https://en.wikipedia.org/wiki/Etraveli_Group" target="_blank" rel="noopener">Etraveli Group</a>. Weather is typical December daily low–high. Event dates: <a href="https://christmasland.ntpc.gov.tw/en/" target="_blank" rel="noopener">Christmasland in New Taipei City</a>, <a href="https://thebeat.asia/hong-kong/the-list/events/hong-kong-winterfest-2026" target="_blank" rel="noopener">Hong Kong WinterFest 2026</a>, <a href="https://www.sapporo.travel/event/winter/munich_christmas_market/?lang=en" target="_blank" rel="noopener">German Christmas Market in Sapporo</a>.</footer>
 </div>
 
 <script>
@@ -281,87 +310,87 @@ const T1=[
  {d:"Kuala Lumpur",low:173,prev:188,lowBy:"Airpaz",air:"SGD 189 (AirAsia)",
   out:[["AK 712","AirAsia","15:05 SIN","16:15 KUL"]],ret:[["AK 705","AirAsia","08:10 KUL","09:20 SIN"]],
   draw:"Pavilion and Suria KLCC mall displays; low-key",w:"hot",t:"24–32°C"},
- {d:"Bali",low:294,prev:272,lowBy:"Kiwi.com",air:"SGD 320 (Saudia + Scoot, two tickets)",
+ {d:"Bali",low:291,prev:272,lowBy:"Jettzy / Kiwi.com",air:"SGD 320 (Saudia + Scoot, two tickets)",
   out:[["SV 856","Saudia","17:10 SIN","20:10 DPS"]],ret:[["TR 281","Scoot","11:10 DPS","13:50 SIN"]],
   draw:"Resort Christmas dinners; not a festive city",w:"hot",t:"24–31°C, wet season"},
- {d:"Ho Chi Minh City",low:455,prev:422,lowBy:"Kiwi.com",air:"SGD 475 (Vietjet + Scoot, two tickets)",
+ {d:"Ho Chi Minh City",low:455,prev:422,lowBy:"Kiwi.com",air:"no single airline booking listed",
   out:[["VJ 814","Vietjet","16:55 SIN","18:05 SGN"]],ret:[["TR 537","Scoot","09:05 SGN","12:10 SIN"]],
   draw:"Crowds around Notre-Dame Cathedral and Nguyen Hue on Christmas Eve",w:"hot",t:"23–31°C"},
- {d:"Bangkok",low:495,prev:499,lowBy:"ly.com + Scoot (two tickets)",air:"SGD 519 (Scoot)",
+ {d:"Bangkok",low:491,prev:499,lowBy:"Scoot, Trip.com",air:"SGD 519 (Scoot)",
   out:[["TR 610","Scoot","16:00 SIN","17:35 BKK"]],ret:[["TR 621","Scoot","22:20 BKK","01:55+1 SIN"]],
   draw:"Big light shows and markets at CentralWorld and ICONSIAM",w:"hot",t:"22–32°C"},
- {d:"Da Nang",low:496,prev:484,lowBy:"eDreams",air:"SGD 532 (Vietjet)",
+ {d:"Da Nang",low:506,prev:484,lowBy:"hutchgo.com",air:"SGD 532 (Vietjet)",
   out:[["VJ 882","Vietjet","19:15 SIN","21:05 DAD"]],ret:[["VJ 973","Vietjet","12:00 DAD","15:55 SIN"]],
   draw:"Hoi An's lantern-lit old town 45 min away; Da Nang's pink cathedral",w:"mild",t:"20–25°C, rainy"},
  {d:"Chengdu",low:580,prev:580,lowBy:"Jettzy",air:"SGD 587 (China Southern)",
   out:[["CZ 8118","China Southern","13:15 SIN","17:35 SZX"],"L:3h35 in Shenzhen",["EU 2220","Chengdu Airlines","21:10 SZX","23:45 CTU"]],ret:[["EU 2217","Chengdu Airlines","08:10 CTU","10:35 SZX"],"LL:5h05 in Shenzhen",["CZ 8047","China Southern","15:40 SZX","19:50 SIN"]],
   draw:"Chunxi Road and mall decorations; modest",w:"cold",t:"3–10°C"},
- {d:"Taipei",low:585,prev:584,lowBy:"eDreams",air:"SGD 678 (Scoot); 587 on two tickets",
+ {d:"Taipei",low:583,prev:584,lowBy:"hutchgo.com",air:"SGD 678 (Scoot); 596 on two tickets",
   out:[["TR 866","Scoot","00:55 SIN","05:35 TPE"]],ret:[["TR 873","Scoot","01:50 TPE","06:30 SIN"]],
   draw:"New Taipei Christmasland in Banqiao; Xinyi district lights",w:"mild",t:"15–20°C"},
- {d:"Hanoi",low:602,prev:648,lowBy:"Mytrip (two tickets)",air:"SGD 608 (Malaysia Airlines + Vietjet, two tickets)",
+ {d:"Hanoi",low:590,prev:648,lowBy:"Cheaptickets.sg",air:"SGD 608 (Malaysia Airlines + Vietjet, two tickets)",
   out:[["MH 602","Malaysia Airlines","06:20 SIN","07:40 KUL"],"L:1h50 in Kuala Lumpur",["MH 752","Malaysia Airlines","09:30 KUL","12:00 HAN"]],ret:[["VJ 915","Vietjet","09:35 HAN","13:55 SIN"]],
   draw:"St Joseph's Cathedral and the Old Quarter; cool weather",w:"mild",t:"15–20°C"},
- {d:"Beijing",low:658,prev:658,lowBy:"Cheaptickets.sg",air:"SGD 728 (Shenzhen Airlines)",
+ {d:"Beijing",low:658,prev:658,lowBy:"Cheaptickets.sg",air:"SGD 728 (Shenzhen)",
   out:[["ZH 228","Shenzhen Airlines","03:00 SIN","07:20 SZX"],"L:2h35 in Shenzhen",["ZH 9103","Shenzhen Airlines","09:55 SZX","13:15 PEK"]],ret:[["ZH 9116","Shenzhen Airlines","07:30 PEK","11:05 SZX"],"L:2h in Shenzhen",["ZH 229","Shenzhen Airlines","13:05 SZX","17:15 SIN"]],
   draw:"Wangfujing and Sanlitun decorations; very cold",w:"cold",t:"−8–3°C"},
- {d:"Guangzhou",low:659,prev:657,lowBy:"Cheaptickets.sg",air:"not sold by 9 Air here; Trip.com SGD 685",
+ {d:"Guangzhou",low:659,prev:657,lowBy:"Cheaptickets.sg",air:"9 Air price hidden; Trip.com SGD 685",
   out:[["AQ 1276","9 Air","01:10 SIN","05:20 CAN"]],ret:[["AQ 1275","9 Air","19:55 CAN","00:10+1 SIN"]],
   draw:"Mall and Canton Tower lights; modest",w:"mild",t:"12–20°C"},
- {d:"Jeju",low:677,prev:601,lowBy:"hutchgo.com",air:"SGD 772 (Scoot); 692 on two tickets",
+ {d:"Jeju",low:672,prev:601,lowBy:"Jettzy",air:"SGD 772 (Scoot); 692 on two tickets",
   out:[["TR 838","Scoot","00:25 SIN","07:20 CJU"]],ret:[["TR 839","Scoot","08:55 CJU","14:15 SIN"]],
   draw:"Winter scenery more than Christmas events",w:"cold",t:"4–10°C"},
- {d:"Goa",low:689,prev:1184,moved:"Was SGD 1,000–1,500",lowBy:"Expedia",air:"not listed; wego SGD 697",
+ {d:"Goa",low:689,prev:1184,moved:"Was SGD 1,000–1,500",lowBy:"Expedia",air:"no single airline booking listed; Trip.com SGD 743",
   out:[["6E 1340","IndiGo","11:15 SIN","14:20 BOM"],"LL:5h30 in Mumbai",["6E 5061","IndiGo","19:50 BOM","21:05 GOX"]],ret:[["6E 5066","IndiGo","21:40 GOX","23:00 BOM"],"L:3h05 in Mumbai",["6E 1339","IndiGo","02:05+1 BOM","10:15+1 SIN"]],
   draw:"Midnight mass at old churches, beach parties",w:"hot",t:"20–33°C",warn:"Lands back in Singapore Sun 27 Dec, 10:15. First checked bag included"},
- {d:"Hong Kong",low:715,prev:717,lowBy:"eDreams",air:"SGD 768 (Scoot)",
+ {d:"Hong Kong",low:710,prev:717,lowBy:"Cheaptickets.sg",air:"SGD 768 (Scoot)",
   out:[["TR 982","Scoot","16:00 SIN","20:35 HKG"]],ret:[["TR 983","Scoot","22:00 HKG","02:15+1 SIN"]],
   draw:"Winterfest, harbourfront light shows, Disneyland",w:"mild",t:"15–20°C"},
- {d:"Busan",low:721,prev:757,lowBy:"eDreams",air:"SGD 742 (Jeju Air)",
+ {d:"Busan",low:720,prev:757,lowBy:"hutchgo.com",air:"SGD 742 (Jeju Air)",
   out:[["7C 2642","Jeju Air","00:25 SIN","08:05 PUS"]],ret:[["7C 2641","Jeju Air","17:45 PUS","23:25 SIN"]],
   draw:"Nampo-dong Christmas Tree Festival",w:"cold",t:"0–8°C"},
- {d:"Shanghai",low:755,prev:719,lowBy:"Jettzy",air:"SGD 764 (China Southern)",
+ {d:"Shanghai",low:717,prev:719,lowBy:"Gotogate / Mytrip",air:"SGD 764 (China Southern)",
   out:[["CZ 8118","China Southern","13:15 SIN","17:35 SZX"],"L:3h25 in Shenzhen",["CZ 3589","China Southern","21:00 SZX","23:15 SHA"]],ret:[["CZ 3576","China Southern","10:10 SHA","12:40 SZX"],"L:3h in Shenzhen",["CZ 8047","China Southern","15:40 SZX","19:50 SIN"]],
   draw:"The Bund, French Concession, Christmas markets",w:"cold",t:"2–9°C"},
- {d:"Macau",low:761,prev:681,lowBy:"Hainan + Thai AirAsia (two tickets)",air:"SGD 761 (two tickets)",
+ {d:"Macau",low:741,prev:681,lowBy:"Jettzy",air:"SGD 761 (Hainan + Thai AirAsia, two tickets)",
   out:[["HU 748","Hainan Airlines","12:15 SIN","15:45 HAK"],"L:2h35 in Haikou",["HU 7935","Hainan Airlines","18:20 HAK","19:30 MFM"]],ret:[["FD 776","Thai AirAsia","10:50 MFM","12:45 DMK"],"L:3h50 in Bangkok",["FD 351","Thai AirAsia","16:35 DMK","20:10 SIN"]],
   draw:"Casino resorts go big on decorations; Hong Kong a ferry away",w:"mild",t:"14–19°C"},
  {d:"Dubai",low:814,prev:814,lowBy:"Adam Vacations",air:"SGD 832 (Emirates)",
   out:[["EK 353","Emirates A380","00:30 SIN","04:10 DXB"]],ret:[["EK 354","Emirates A380","03:15 DXB","14:50 SIN"]],
   draw:"Hotel and souk Christmas markets; pleasant weather",w:"mild",t:"17–25°C"},
- {d:"Manila",low:819,prev:788,lowBy:"Kiwi.com",air:"SGD 837 (Jettzy + Cebu Pacific, two tickets)",
+ {d:"Manila",low:753,prev:788,lowBy:"ly.com, Cebu Pacific",air:"no single airline booking listed",
   out:[["AK 1794","AirAsia","12:10 SIN","14:35 BKI"],"L:4h30 in Kota Kinabalu",["Z2 502","Philippines AirAsia","19:05 BKI","21:15 MNL"]],ret:[["5J 803","Cebu Pacific","20:20 MNL","00:10+1 SIN"]],
   draw:"Asia's biggest Christmas: Simbang Gabi masses, lantern displays",w:"hot",t:"23–30°C"},
- {d:"Seoul",low:845,prev:833,lowBy:"Kiwi.com",air:"SGD 866 (Jeju Air + Scoot, two tickets)",
+ {d:"Seoul",low:845,prev:833,lowBy:"Kiwi.com",air:"SGD 865 (Jeju Air + Scoot, two tickets)",
   out:[["7C 2624","Jeju Air","01:10 SIN","08:40 ICN"]],ret:[["TR 843","Scoot","11:25 ICN","17:10 SIN"]],
   draw:"Lotte World Tower market, Myeongdong, Cheonggyecheon lights",w:"cold",t:"−6–3°C"},
- {d:"Perth",low:949,prev:1069,moved:"Was SGD 1,000–1,500",lowBy:"Cheaptickets.sg (two tickets)",air:"SGD 1,112 (Scoot); 1,052 on two tickets",
+ {d:"Perth",low:949,prev:1069,moved:"Was SGD 1,000–1,500",lowBy:"Cheaptickets.sg",air:"SGD 1,112 (Scoot); 1,050 on two tickets",
   out:[["TR 52","Scoot","03:15 SIN","08:25 PER"]],ret:[["TR 53","Scoot","10:35 PER","15:50 SIN"]],
   draw:"Summer Christmas, city lights trail",w:"hot",t:"17–30°C",warn:"Under 1,000 only through an agent"},
- {d:"Harbin",low:953,prev:1028,moved:"Was SGD 1,000–1,500",lowBy:"Gotogate / Mytrip",air:"XiamenAir price hidden; Trip.com SGD 1,044",
+ {d:"Harbin",low:953,prev:1028,moved:"Was SGD 1,000–1,500",lowBy:"Gotogate / Mytrip / Flightnetwork",air:"XiamenAir price hidden; Trip.com SGD 1,044",
   out:[["MF 8686","XiamenAir","14:15 SIN","19:25 NKG"],"L:2h05 in Nanjing",["MF 8097","XiamenAir","21:30 NKG","00:10+1 HRB"]],ret:[["MF 8080","XiamenAir","13:15 HRB","17:35 XMN"],"L:3h55 in Xiamen",["MF 8675","XiamenAir","21:30 XMN","02:00+1 SIN"]],
   draw:"Ice and Snow World usually opens in late December",w:"cold",t:"−24 to −13°C",warn:"Lands just after midnight; home at 02:00 Sun"}
 ];
 const T2=[
- {d:"Osaka",low:1008,prev:930,moved:"Was under SGD 1,000",lowBy:"eDreams",air:"SGD 1,312 (Peach); 1,052 on two tickets",
+ {d:"Osaka",low:1022,prev:930,moved:"Was under SGD 1,000",lowBy:"Agoda",air:"SGD 1,312 (Peach); 1,053 on two tickets",
   out:[["MM 774","Peach","02:15 SIN","09:35 KIX"]],ret:[["MM 773","Peach","18:40 KIX","00:55+1 SIN"]],
   draw:"Umeda and Midosuji illuminations, Universal Studios Japan",w:"cold",t:"3–10°C"},
- {d:"Tokyo",low:1064,prev:1108,lowBy:"Gotogate",air:"China Eastern price hidden; Agoda SGD 1,075",
+ {d:"Tokyo",low:1064,prev:1108,lowBy:"Mytrip",air:"China Eastern price hidden; Trip.com SGD 1,098",
   out:[["MU 546","China Eastern","10:10 SIN","15:15 PVG"],"L:1h55 in Shanghai",["MU 271","China Eastern","17:10 PVG","20:55 NRT"]],ret:[["MU 522","China Eastern","16:55 NRT","19:35 PVG"],"L:4h in Shanghai",["MU 543","China Eastern","23:35 PVG","05:25+1 SIN"]],
   draw:"Roppongi and Marunouchi illuminations, Christmas markets",w:"cold",t:"3–12°C",warn:"Lands back Sun 27 Dec, 05:25. Two checked bags included. Scoot nonstop to Haneda is SGD 1,453"},
- {d:"Melbourne",low:1087,prev:1137,lowBy:"Kiwi.com",air:"SGD 1,124 (Jetstar + Scoot, two tickets)",
+ {d:"Melbourne",low:1083,prev:1137,lowBy:"Flightnetwork",air:"SGD 1,122 (Jetstar + Scoot, two tickets)",
   out:[["JQ 8","Jetstar","21:00 SIN","07:25+1 MEL"]],ret:[["TR 59","Scoot","13:25 MEL","18:20 SIN"]],
   draw:"Myer Christmas windows, Federation Square; summer",w:"hot",t:"13–25°C",warn:"Overnight flight, arrives Thu 24 Dec morning"},
- {d:"Sydney",low:1092,prev:1099,lowBy:"hutchgo.com",air:"SGD 1,207 (Scoot); 1,115 on two tickets",
+ {d:"Sydney",low:1092,prev:1099,lowBy:"hutchgo.com",air:"SGD 1,207 (Scoot); 1,114 on two tickets",
   out:[["TR 40","Scoot","01:15 SIN","12:10 SYD"]],ret:[["TR 41","Scoot","13:25 SYD","18:40 SIN"]],
   draw:"Beach Christmas, Boxing Day sales",w:"hot",t:"18–26°C"},
- {d:"Okinawa",low:1104,prev:928,moved:"Was under SGD 1,000",lowBy:"Kiwi.com (two tickets)",air:"SGD 1,158 (Scoot); 1,122 on two tickets",
+ {d:"Okinawa",low:1093,prev:928,moved:"Was under SGD 1,000",lowBy:"Jettzy",air:"SGD 1,158 (Scoot); 1,122 on two tickets",
   out:[["TR 834","Scoot","01:10 SIN","08:00 OKA"]],ret:[["TR 835","Scoot","09:15 OKA","13:50 SIN"]],
   draw:"Southeast Botanical Gardens winter illumination, Kokusai Street",w:"mild",t:"15–20°C"},
- {d:"Cebu",low:1107,prev:1286,lowBy:"eDreams",air:"SGD 1,199 (Scoot); 1,109 on two tickets",
+ {d:"Cebu",low:1082,prev:1286,lowBy:"Cheaptickets.sg",air:"SGD 1,199 (Scoot); 1,109 on two tickets",
   out:[["TR 584","Scoot","02:20 SIN","06:10 CEB"]],ret:[["TR 593","Scoot","21:55 CEB","01:50+1 SIN"]],
   draw:"Filipino Christmas, Simbang Gabi masses",w:"hot",t:"24–30°C"},
- {d:"Sapporo",low:1180,prev:1181,lowBy:"Flightnetwork (two tickets)",air:"SGD 1,392 (Scoot); 1,184 on two tickets",
+ {d:"Sapporo",low:1180,prev:1181,lowBy:"Flightnetwork",air:"SGD 1,392 (Scoot); 1,184 on two tickets",
   out:[["TR 892","Scoot","06:10 SIN","11:00 TPE"],"L:1h15 in Taipei",["TR 892","Scoot","12:15 TPE","17:00 CTS"]],ret:[["TR 893","Scoot","18:15 CTS","22:05 TPE"],"L:1h15 in Taipei",["TR 893","Scoot","23:20 TPE","04:00+1 SIN"]],
   draw:"Snow, Odori Park Christmas market, White Illumination",w:"cold",t:"−6–0°C"},
  {d:"Fukuoka",low:1235,prev:1013,lowBy:"Jeju Air",air:"SGD 1,235 (Jeju Air)",
@@ -532,6 +561,7 @@ function renderTrips(){
     ${it.ev?`<p class="ev">${esc(it.ev)}</p>`:""}<a class="back" href="#row-${slug(r.d)}">↑ Back to ${esc(r.d)} fares</a></article>`;}).join("");
 }
 
+const CMP=[{"d":"Taipei","low":583,"lowBy":["hutchgo.com"],"airline":{"name":"Scoot","one":678,"two":596,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":625,"sep":false},"Booking.com":{"p":593,"sep":true}},"best":593,"n":17},{"d":"Kuala Lumpur","low":173,"lowBy":["Airpaz"],"airline":{"name":"AirAsia","one":189,"two":null,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":190,"sep":false},"Expedia":{"p":189,"sep":false},"Booking.com":{"p":193,"sep":false},"Agoda":{"p":175,"sep":true},"Traveloka":{"p":182,"sep":true}},"best":175,"n":15},{"d":"Bali","low":291,"lowBy":["Jettzy","Kiwi.com"],"airline":{"name":"Saudia, Scoot","one":null,"two":320,"multi":true,"hidden":false},"ota":{"Booking.com":{"p":340,"sep":true}},"best":320,"n":7},{"d":"Ho Chi Minh City","low":455,"lowBy":["Kiwi.com"],"airline":null,"ota":{"Expedia":{"p":534,"sep":true},"Booking.com":{"p":480,"sep":true}},"best":480,"n":10},{"d":"Bangkok","low":491,"lowBy":["Scoot, Trip.com"],"airline":{"name":"Scoot","one":519,"two":null,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":517,"sep":false},"Booking.com":{"p":518,"sep":true},"Agoda":{"p":509,"sep":false}},"best":509,"n":18},{"d":"Da Nang","low":506,"lowBy":["hutchgo.com"],"airline":{"name":"Vietjet","one":532,"two":null,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":522,"sep":false},"Expedia":{"p":609,"sep":true},"Booking.com":{"p":514,"sep":false},"Traveloka":{"p":519,"sep":true}},"best":514,"n":16},{"d":"Chengdu","low":580,"lowBy":["Jettzy"],"airline":{"name":"China Southern","one":587,"two":null,"multi":false,"hidden":false},"ota":{},"best":587,"n":3},{"d":"Hanoi","low":590,"lowBy":["Cheaptickets.sg"],"airline":{"name":"Malaysia Airlines, Vietjet","one":null,"two":608,"multi":true,"hidden":false},"ota":{"Booking.com":{"p":637,"sep":true}},"best":608,"n":7},{"d":"Beijing","low":658,"lowBy":["Cheaptickets.sg"],"airline":{"name":"Shenzhen","one":728,"two":null,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":686,"sep":false},"Expedia":{"p":728,"sep":false},"Booking.com":{"p":729,"sep":false}},"best":686,"n":15},{"d":"Guangzhou","low":659,"lowBy":["Cheaptickets.sg"],"airline":{"name":"9 Air","one":null,"two":null,"multi":false,"hidden":true},"ota":{"Trip.com":{"p":685,"sep":false},"Booking.com":{"p":781,"sep":true},"Traveloka":{"p":786,"sep":true}},"best":685,"n":14},{"d":"Jeju","low":672,"lowBy":["Jettzy"],"airline":{"name":"Scoot","one":772,"two":692,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":728,"sep":false},"Booking.com":{"p":705,"sep":true}},"best":692,"n":17},{"d":"Goa","low":689,"lowBy":["Expedia"],"airline":null,"ota":{"Trip.com":{"p":743,"sep":false},"Expedia":{"p":689,"sep":false},"Booking.com":{"p":725,"sep":true}},"best":689,"n":10},{"d":"Hong Kong","low":710,"lowBy":["Cheaptickets.sg"],"airline":{"name":"Scoot","one":768,"two":null,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":762,"sep":false},"Booking.com":{"p":731,"sep":false}},"best":731,"n":15},{"d":"Busan","low":720,"lowBy":["hutchgo.com"],"airline":{"name":"Jeju Air","one":742,"two":null,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":747,"sep":false},"Booking.com":{"p":738,"sep":false}},"best":738,"n":14},{"d":"Shanghai","low":717,"lowBy":["Gotogate","Mytrip"],"airline":{"name":"China Southern","one":764,"two":null,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":748,"sep":false},"Booking.com":{"p":765,"sep":false},"Agoda":{"p":733,"sep":false}},"best":733,"n":14},{"d":"Macau","low":741,"lowBy":["Jettzy"],"airline":{"name":"Hainan, Thai AirAsia","one":null,"two":761,"multi":true,"hidden":false},"ota":{"Booking.com":{"p":781,"sep":true}},"best":761,"n":4},{"d":"Dubai","low":814,"lowBy":["Adam Vacations"],"airline":{"name":"Emirates","one":832,"two":null,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":867,"sep":false},"Expedia":{"p":832,"sep":false},"Booking.com":{"p":824,"sep":false}},"best":824,"n":16},{"d":"Manila","low":753,"lowBy":["ly.com, Cebu Pacific"],"airline":null,"ota":{},"best":null,"n":4},{"d":"Seoul","low":845,"lowBy":["Kiwi.com"],"airline":{"name":"Jeju Air, Scoot","one":null,"two":865,"multi":true,"hidden":false},"ota":{"Booking.com":{"p":875,"sep":true}},"best":865,"n":10},{"d":"Perth","low":949,"lowBy":["Cheaptickets.sg"],"airline":{"name":"Scoot","one":1112,"two":1050,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":1084,"sep":false},"Booking.com":{"p":1078,"sep":true}},"best":1050,"n":16},{"d":"Harbin","low":953,"lowBy":["Gotogate","Mytrip","Flightnetwork"],"airline":{"name":"XiamenAir","one":null,"two":null,"multi":false,"hidden":true},"ota":{"Trip.com":{"p":1044,"sep":false},"Booking.com":{"p":1002,"sep":false}},"best":1002,"n":13},{"d":"Osaka","low":1022,"lowBy":["Agoda"],"airline":{"name":"Peach","one":1312,"two":1053,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":1088,"sep":false},"Expedia":{"p":1365,"sep":false},"Booking.com":{"p":1054,"sep":true},"Agoda":{"p":1022,"sep":true}},"best":1022,"n":16},{"d":"Tokyo","low":1064,"lowBy":["Mytrip"],"airline":{"name":"China Eastern","one":null,"two":null,"multi":false,"hidden":true},"ota":{"Trip.com":{"p":1098,"sep":false},"Booking.com":{"p":1112,"sep":false},"Agoda":{"p":1075,"sep":false}},"best":1075,"n":15},{"d":"Melbourne","low":1083,"lowBy":["Flightnetwork"],"airline":{"name":"Jetstar, Scoot","one":null,"two":1122,"multi":true,"hidden":false},"ota":{"Booking.com":{"p":1108,"sep":true}},"best":1108,"n":8},{"d":"Sydney","low":1092,"lowBy":["hutchgo.com"],"airline":{"name":"Scoot","one":1207,"two":1114,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":1167,"sep":false},"Booking.com":{"p":1138,"sep":true}},"best":1114,"n":17},{"d":"Okinawa","low":1093,"lowBy":["Jettzy"],"airline":{"name":"Scoot","one":1158,"two":1122,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":1181,"sep":false},"Booking.com":{"p":1132,"sep":true},"Agoda":{"p":1122,"sep":true}},"best":1122,"n":15},{"d":"Cebu","low":1082,"lowBy":["Cheaptickets.sg"],"airline":{"name":"Scoot","one":1199,"two":1109,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":1125,"sep":false},"Booking.com":{"p":1115,"sep":true},"Agoda":{"p":1110,"sep":false},"Traveloka":{"p":1094,"sep":true}},"best":1094,"n":18},{"d":"Sapporo","low":1180,"lowBy":["Flightnetwork"],"airline":{"name":"Scoot","one":1392,"two":1184,"multi":false,"hidden":false},"ota":{"Trip.com":{"p":1248,"sep":false}},"best":1184,"n":14},{"d":"Fukuoka","low":1235,"lowBy":["Jeju Air"],"airline":{"name":"Jeju Air","one":1235,"two":null,"multi":false,"hidden":false},"ota":{"Booking.com":{"p":1349,"sep":false}},"best":1235,"n":10}];
 const label={cold:"Cold winter",mild:"Cool / mild",hot:"Warm"};
 const cols=[["Destination","d"],["Price","low"],["Out · Wed 23 Dec","out"],["Back · Sat 26 Dec","ret"],["Christmas draw","draw"],["Weather","w"]];
 let filter="all";
@@ -564,6 +594,30 @@ function render(id,rows,state){
   t.querySelectorAll("th button").forEach(b=>b.addEventListener("click",()=>{const i=+b.dataset.i;if(state.key===i)state.dir*=-1;else{state.key=i;state.dir=1;}render(id,rows,state);}));
   return data.length;
 }
+function renderCmp(){
+  const T=["Trip.com","Expedia","Booking.com","Agoda","Traveloka"];
+  const TRUSTED=new Set(T);
+  const rows=CMP.slice().sort((a,b)=>a.low-b.low);
+  const cell=(p,sep,best,label)=>p==null?`<td class="c" data-label="${label}"><span class="na">—</span></td>`:`<td class="c${best?" best":""}" data-label="${label}">SGD ${fmt(p)}${sep?'<span class="tk">2 tickets</span>':""}</td>`;
+  const head=`<thead><tr><th scope="col">Destination</th><th scope="col">Cheapest anywhere</th><th scope="col">Airline direct</th>${T.map(t=>`<th scope="col">${t}</th>`).join("")}<th scope="col">Trusted costs</th></tr></thead>`;
+  const body="<tbody>"+rows.map(r=>{
+    const al=r.airline;let alCell;
+    if(!al){alCell=`<td class="c" data-label="Airline direct"><span class="na">—</span><span class="tk">not sold as one booking</span></td>`;}
+    else if(al.hidden){alCell=`<td class="c" data-label="Airline direct"><span class="na">price hidden</span><span class="tk">${esc(al.name)}</span></td>`;}
+    else{const p=al.one??al.two;const isBest=p===r.best||(al.two===r.best);const extra=al.one&&al.two?`<span class="tk">${fmt(al.two)} on 2 tickets</span>`:(al.one?"":'<span class="tk">2 tickets</span>');
+      alCell=`<td class="c${(al.one===r.best||al.two===r.best)?" best":""}" data-label="Airline direct">SGD ${fmt(p)}<span class="tk">${esc(al.name)}</span>${extra}</td>`;}
+    const AIRL=new Set([...T1,...T2].flatMap(x=>[...x.out,...x.ret]).filter(l=>Array.isArray(l)).map(l=>l[1].replace(/ A380$/,"")));
+    const ok=n=>TRUSTED.has(n)||AIRL.has(n)||(al&&al.name.split(", ").includes(n));
+    const ETR=new Set(["Gotogate","Mytrip","Flightnetwork"]);
+    const lk=!r.lowBy.some(n=>n.split(", ").every(x=>ok(x)||ETR.has(x)));
+    const et=!lk&&r.lowBy.some(n=>n.split(", ").some(x=>ETR.has(x)));
+    const gap=r.best==null?'<span class="na">no trusted seller</span>':(r.best===r.low?'<span class="gap">same</span>':`<span class="gap">+${fmt(r.best-r.low)}</span>`);
+    return `<tr><td class="dest" data-label="Destination"><span class="dn">${esc(r.d)}</span></td>
+      <td class="c low" data-label="Cheapest anywhere">SGD ${fmt(r.low)}<span class="tk">${esc(r.lowBy.join(" / "))}</span>${lk?'<span class="lk">lesser-known</span>':""}${et?'<span class="lk et">Etraveli, runs Booking.com flights</span>':""}</td>
+      ${alCell}${T.map(t=>{const o=r.ota[t];return cell(o?o.p:null,o?o.sep:false,o&&o.p===r.best,t);}).join("")}
+      <td class="gapc" data-label="Trusted costs">${gap}</td></tr>`;}).join("")+"</tbody>";
+  document.getElementById("t4").innerHTML=head+body;
+}
 function renderStruck(){
   const t=document.getElementById("t3");
   t.innerHTML=`<thead><tr><th scope="col">Destination</th><th scope="col">Cheapest found</th><th scope="col">Why</th><th scope="col">Flights</th></tr></thead><tbody>`+
@@ -574,7 +628,7 @@ function renderStruck(){
 const s1={key:1,dir:1},s2={key:1,dir:1};
 function all(){document.getElementById("c1").textContent=render("t1",T1,s1);document.getElementById("c2").textContent=render("t2",T2,s2);}
 document.querySelectorAll(".filters button").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.f;document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));all();}));
-all(); renderStruck(); renderTrips();
+all(); renderStruck(); renderTrips(); renderCmp();
 document.getElementById("n1").textContent=T1.length;
 document.getElementById("n2").textContent=T2.length;
 document.getElementById("n3").textContent=T3.length;
@@ -588,7 +642,7 @@ function watch(el,box,id){
   if(hint)hint.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>el.scrollBy({left:+b.dataset.dir*el.clientWidth*.8,behavior:"smooth"})));
   f();
 }
-["s1","s2","s3"].forEach(id=>{const el=document.getElementById(id);watch(el,el.parentElement,id);});
+["s1","s2","s3","s4"].forEach(id=>{const el=document.getElementById(id);watch(el,el.parentElement,id);});
 watch(document.querySelector(".links"),document.querySelector(".links"));
 const rewatch=()=>watchers.forEach(f=>f());
 addEventListener("resize",rewatch);
