@@ -124,6 +124,11 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
 .shead-in{margin:0 1px;overflow:hidden;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 3px 8px var(--shade)}
 .shead-t{border-collapse:collapse;table-layout:fixed;min-width:0}
 .shead-t th{border-bottom:0}
+.scroll tr>:first-child,.shead-t th:first-child{position:sticky;left:0;z-index:2;background:var(--surface);box-shadow:inset -1px 0 0 var(--line)}
+.shead-t th:first-child{position:relative}
+.scroll tr:target>:first-child{background:var(--pine-soft)}
+.sbox[data-l="1"] .scroll tr>:first-child,.sbox[data-l="1"] .shead-t th:first-child{box-shadow:inset -1px 0 0 var(--line),8px 0 10px -6px var(--shade)}
+.sbox::before{display:none}
 .sbox::before,.sbox::after{content:"";position:absolute;top:1px;bottom:1px;width:36px;pointer-events:none;opacity:0;transition:opacity .2s;z-index:2}
 .sbox::before{left:1px;border-radius:10px 0 0 10px;background:linear-gradient(to right,var(--shade),transparent)}
 .sbox::after{right:1px;border-radius:0 10px 10px 0;background:linear-gradient(to left,var(--shade),transparent)}
@@ -137,6 +142,8 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
 .links[data-l="1"][data-r="1"]{-webkit-mask-image:linear-gradient(to right,transparent,#000 15%,#000 85%,transparent);mask-image:linear-gradient(to right,transparent,#000 15%,#000 85%,transparent)}
 @media (max-width:760px){
   .shead{display:none}
+  .scroll tr>:first-child{position:static;background:none;box-shadow:none}
+  .scroll tr:target>:first-child{background:none}
   .hint{display:none}
   .sbox::before,.sbox::after{display:none}
   .scroll{overflow:visible;background:none;border:0;border-radius:0}
@@ -655,7 +662,7 @@ const rewatch=()=>watchers.forEach(f=>f());
   const tbl=document.getElementById(id),sc=tbl.parentElement,box=sc.parentElement;
   const wrap=document.createElement("div");wrap.className="shead";wrap.setAttribute("aria-hidden","true");
   const inner=document.createElement("div");inner.className="shead-in";wrap.appendChild(inner);box.insertBefore(wrap,sc);
-  const sync=()=>{const t=inner.firstChild;if(t)t.style.transform=`translateX(${-sc.scrollLeft}px)`;};
+  const sync=()=>{const t=inner.firstChild;if(!t)return;const x=sc.scrollLeft;t.style.transform=`translateX(${-x}px)`;const c=t.tHead&&t.tHead.rows[0].cells[0];if(c)c.style.transform=`translateX(${x}px)`;};
   function measure(){const th=tbl.tHead,t=inner.firstChild;if(!th||!t)return;
     t.style.width=tbl.offsetWidth+"px";const src=th.rows[0].cells,dst=t.tHead.rows[0].cells;
     for(let i=0;i<src.length;i++){const w=src[i].getBoundingClientRect().width+"px";dst[i].style.width=w;dst[i].style.boxSizing="border-box";}
