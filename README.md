@@ -8,5 +8,8 @@ Live page: https://axxng.github.io/christmas-getaway-2026/
 - A side-by-side table of prices on the airline itself, Trip.com, Expedia, Booking.com, Agoda and Traveloka
 - A struck-off table for destinations that went over budget or had no sensible routing
 - A rough itinerary for every destination in both tables, timed around the flights
+- Version tabs: every update is kept, so you can flip back to any earlier day's prices
 
-Fares were last checked on 16–17 Nov 2026 and will have moved since.
+How each update is done: [RITUAL.md](RITUAL.md).
+
+Fares were last checked on 18 Nov 2026 and will have moved since.
