@@ -23,6 +23,7 @@ Trip: Singapore → destination, out **Wed 23 Dec 2026**, back **Sat 26 Dec 2026
 - Everything in the struck-off table (Nagoya, Brisbane, Auckland, Clark, Kaohsiung, Europe…). Reinstate anything back under SGD 1,500 with a sensible routing.
 
 ## 4. Look for new destinations
+- Never re-add destinations Alex removed: Penang (removed 19 Nov). Keep them in the struck-off table.
 - Search a fresh batch of candidates with a Christmas angle that haven't been checked before.
 - Add any under SGD 1,500 with a sensible routing. List the rest as "checked, not added".
 
