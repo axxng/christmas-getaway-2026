@@ -12,4 +12,4 @@ Live page: https://axxng.github.io/christmas-getaway-2026/
 
 How each update is done: [RITUAL.md](RITUAL.md).
 
-Fares were last checked on 18 Nov 2026 and will have moved since.
+Fares were last checked on 19 Nov 2026 and will have moved since.
