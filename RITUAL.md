@@ -52,3 +52,8 @@ Trip: Singapore → destination, out **Wed 23 Dec 2026**, back **Sat 26 Dec 2026
 ## 10. Save and report
 - Update the brain entry with today's prices and changes, commit and push, and say whether the push went through.
 - Report: what moved, what was added, what was struck off, the biggest changes, the best bets, and anything you couldn't do. Cite sources.
+
+## Tooling notes
+- Google Flights blocks the cloud browser with a CAPTCHA. Price in the desktop app's built-in browser instead. Don't bypass a CAPTCHA.
+- Airport codes change: Siem Reap is SAI and Phnom Penh is KTI (the old REP and PNH return nothing).
+- Google's booking-page layout changes without notice (it did on 21 Nov). If flight numbers stop parsing, check the raw text before trusting the results.
