@@ -29,6 +29,7 @@ Trip: Singapore → destination, out **Wed 23 Dec 2026**, back **Sat 26 Dec 2026
 
 ## 4b. Japan section
 - Re-price the Japan cities: cheapest (any routing), cheapest nonstop, and Singapore Airlines nonstop for Tokyo, Osaka, Fukuoka and Nagoya. Recheck the regional cities in one pass.
+- Since 23 Nov the Japan section compares two returns: back Sat 26 and back Sun 27 (URL `...through%202026-12-27`). Price every Japan route for both dates, keep the per-city tabs, the Sat/Sun table and the "Show every card" buttons. Data shape: each city has `sat` and `sun`, each with `opts`, `from` and an optional `out`; set `JP.two=true`.
 - Update each city's options, verdict and the "how to choose" guide.
 
 ## 5. Re-evaluate strike-offs
