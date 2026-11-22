@@ -27,6 +27,10 @@ Trip: Singapore → destination, out **Wed 23 Dec 2026**, back **Sat 26 Dec 2026
 - Search a fresh batch of candidates with a Christmas angle that haven't been checked before.
 - Add any under SGD 1,500 with a sensible routing. List the rest as "checked, not added".
 
+## 4b. Japan section
+- Re-price the Japan cities: cheapest (any routing), cheapest nonstop, and Singapore Airlines nonstop for Tokyo, Osaka, Fukuoka and Nagoya. Recheck the regional cities in one pass.
+- Update each city's options, verdict and the "how to choose" guide.
+
 ## 5. Re-evaluate strike-offs
 - Strike off if the cheapest sensible round trip is over SGD 1,500, or there's no sensible routing (about 12h each way, or you'd lose most of the three days).
 - Flag (don't strike) anything that's under a price line only through a lesser-known agent.
@@ -54,6 +58,7 @@ Trip: Singapore → destination, out **Wed 23 Dec 2026**, back **Sat 26 Dec 2026
 - Report: what moved, what was added, what was struck off, the biggest changes, the best bets, and anything you couldn't do. Cite sources.
 
 ## Tooling notes
+- Keep the built-in browser pane visible or use one navigate per route: a background loop in a hidden pane gets throttled to a crawl.
 - Google Flights blocks the cloud browser with a CAPTCHA. Price in the desktop app's built-in browser instead. Don't bypass a CAPTCHA.
 - Airport codes change: Siem Reap is SAI and Phnom Penh is KTI (the old REP and PNH return nothing).
 - Google's booking-page layout changes without notice (it did on 21 Nov). If flight numbers stop parsing, check the raw text before trusting the results.
