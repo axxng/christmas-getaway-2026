@@ -13,4 +13,4 @@ Live page: https://axxng.github.io/christmas-getaway-2026/
 
 How each update is done: [RITUAL.md](RITUAL.md).
 
-Japan fares were last checked on 23 Nov 2026 and the other tables on 22 Nov 2026; all and will have moved since.
+Japan fares were last checked on 23 Nov 2026 and the other tables on 22 Nov 2026. Both will have moved since.
