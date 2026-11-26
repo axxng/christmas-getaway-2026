@@ -13,4 +13,4 @@ Live page: https://axxng.github.io/christmas-getaway-2026/
 
 How each update is done: [RITUAL.md](RITUAL.md).
 
-Osaka fares were last checked on 26 Nov 2026, the other Japan cities on 23 Nov 2026, and the other tables on 22 Nov 2026. All will have moved since.
+Osaka and Chengdu fares were last checked on 26 Nov 2026, the other Japan cities on 23 Nov 2026, and the other tables on 22 Nov 2026. All will have moved since.

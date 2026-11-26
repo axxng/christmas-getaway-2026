@@ -30,7 +30,7 @@ Trip: Singapore → destination, out **Wed 23 Dec 2026**, back **Sat 26 Dec 2026
 ## 4b. Japan section
 - Re-price the Japan cities: cheapest (any routing), cheapest nonstop, and Singapore Airlines nonstop for Tokyo, Osaka, Fukuoka and Nagoya. Recheck the regional cities in one pass.
 - Since 23 Nov the Japan section compares two returns: back Sat 26 and back Sun 27 (URL `...through%202026-12-27`). Price every Japan route for both dates, keep the per-city tabs, the Sat/Sun table and the "Show every card" buttons. Data shape: each city has `sat` and `sun`, each with `opts`, `from` and an optional `out`; set `JP.two=true`.
-- A partial update (one city) keeps the other cities from the last version, sets `upd` on the re-priced city (shown as a chip) and says in the stamp which parts are from which date. For Osaka, check Peach, Scoot nonstop (TR 880/881, new 24 Nov), China Eastern via Shanghai, Jeju Air via Busan, and SIA nonstop.
+- A partial update (one city) keeps the other cities from the last version, sets `upd` on the re-priced city (shown as a chip) and says in the stamp which parts are from which date. A Chengdu card (section "Chengdu, Sat vs Sun", data `XTRA`) was added 26 Nov: re-price it with Osaka. Search "SIN to Chengdu" (flights land at Tianfu, TFU) and check Hainan via Haikou, China Eastern via Kunming, Sichuan Airlines nonstop (3U 3920/3909), Air China nonstop (CA 404/403). For Osaka, check Peach, Scoot nonstop (TR 880/881, new 24 Nov), China Eastern via Shanghai, Jeju Air via Busan, and SIA nonstop.
 - Update each city's options, verdict and the "how to choose" guide.
 
 ## 5. Re-evaluate strike-offs
